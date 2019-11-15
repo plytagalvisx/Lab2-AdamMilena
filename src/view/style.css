@@ -1,0 +1,485 @@
+body {
+    display: flex;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    font-family: Comic Sans MS, serif;
+    box-sizing: border-box;
+}
+
+.grid-sidebar {
+    display: grid;
+    width: 20%;
+    height: 0;
+    grid-template-areas: "sidebar  main";
+    grid-template-rows: 50px 1fr 30px;
+    grid-template-columns: 150px 1fr;
+}
+
+.grid-search {
+    display: grid;
+    width: 100%;
+    height: 0;
+    grid-template-areas: "sidebar  main";
+    grid-template-rows: 50px 1fr 30px;
+    grid-template-columns: 150px 1fr;
+}
+
+#content-grid {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    border: 5px solid black;
+}
+
+#container-header {
+    background-color: lightgrey;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#container-home {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    font-size: 14px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+#container-search {
+    display: flex;
+    flex-direction: row;
+}
+
+#searchContainer {
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+}
+
+#find-a-dish-text {
+    padding-right: 230px;
+}
+
+#padding-down {
+    padding-top: 50px;
+}
+
+.divMiddleHeight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.divMiddleWidth {
+    flex: 0.4;
+    display: flex;
+}
+
+#divBorder {
+    border: 1px solid;
+    text-align: center;
+}
+
+#divBorderNothing {
+    border: 1px solid white;
+    text-align: center;
+}
+
+#divBorderInput {
+    border: 1px solid;
+    text-align: center;
+    color: darkgrey;
+}
+
+#text-center {
+    width: 40%;
+    text-align: center;
+    display: flex;
+}
+
+.btn{
+    width: 200px;
+    height: auto;
+    background: orange;
+    display: inline-block;
+    padding: 1%;
+    border: 1px solid black;
+    margin-bottom: 0.3em;
+    margin-right: 0.3em;
+    text-align:center;
+    box-shadow: 2px 2px black;
+}
+
+.btn:hover{
+    color: black;
+    background-color: white;
+}
+
+.sidebarBtn {
+    cursor: pointer;
+    color: #212529;
+    background-color: #f6b26b;
+    border-color: #212529;
+    /*padding-left: 25px;
+    padding-right: 25px;*/
+    border-right: solid;
+    border-bottom: solid;
+}
+
+.flex-content-Btn {
+    display: flex;
+}
+
+#flexBtn {
+    flex: 1;
+    flex-direction: row;
+}
+
+#search-dish-button {
+    border-right: solid;
+    border-bottom: solid;
+    cursor: pointer;
+    color: #212529;
+    background-color: #f6b26b;
+    border-color: #212529;
+    margin-left: 10px;
+}
+
+.item-sidebar {
+    border: 1px solid black;
+    grid-area: sidebar;
+}
+
+.item-main {
+    border: 1px solid black;
+    grid-area: main;
+    margin-left: 20%;
+}
+
+.subheading {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-top: grey solid 3px;
+    border-bottom: black solid 3px;
+}
+
+#inputNumOfPeople {
+    margin-left: 10px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    width: 30px;
+    height: 20px;
+    padding: 5px;
+    font-size: 1rem;
+    text-align: left;
+    border-color: darkgrey;
+}
+
+#overview-persons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 20%;
+    font-size: 18px;
+}
+
+.my-dinner-text {
+    padding-right: 110px;
+}
+
+.stretchBottom {
+    margin-bottom: 500px;
+}
+
+/* Source for backBtn style: http://html-tuts.com/css-arrows-up-down-left-right-triangle/ */
+#backBtn {
+    display: inline-block;
+    position: relative;
+    background: orange;
+    padding: 5px;
+    margin: 10px;
+}
+
+#backBtn:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid orange;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+#backBtn:hover {
+    color: black;
+    background-color: white;
+}
+
+#backBtn:hover:after {
+    border-right: 10px solid white;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
+
+#horiline {
+    width: 80%;
+    border-bottom: 3px solid darkgray;
+    margin: 2%;
+}
+
+#vertline {
+    border-left: 3px solid darkgray;
+    margin: 2%;
+}
+
+#dishes-container {
+    display:flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+
+#dishes-items {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 1%;
+    text-align: center;
+}
+
+.dish-image {
+    object-fit: contain;
+    border: 3px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.dish-text {
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.dish {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#price-container {
+    text-align: left;
+    padding: 10px;
+    align-self: flex-end;
+}
+
+#print-container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 15% 30% 10% 30% 15%;
+    grid-template-rows: auto;
+}
+
+.print-cluster {
+    grid-column: 2 / span 3;
+    display: grid;
+    grid-template-columns: 35% 25% 40%;
+    grid-template-rows: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-weight: bold;
+    font-size: large;
+}
+
+.print-image {
+    grid-column: 1 / 1;
+    max-width: 90%;
+    border: 2px solid black;
+}
+
+.dish-title {
+    grid-column: 2 / 2;
+}
+
+.dish-instructions {
+    grid-column: 3 / 3;
+    font-weight: normal;
+    font-size: initial;
+}
+
+@media (max-width: 450px) {
+    #overview-persons {
+        font-size: small;
+    }
+
+    .print-cluster {
+        grid-column: 1 / span 5;
+        font-size: small;
+    }
+
+    .dish-instructions {
+        font-size: small;
+    }
+
+    #overview-persons {
+        width: 30%;
+    }
+
+    #backBtn {
+        font-size: small;
+    }
+
+    #dishes-items {
+        flex-direction: column;
+    }
+
+    #text-center {
+        width: 80%;
+    }
+
+    .grid-sidebar {
+        display: grid;
+        width: 100%;
+        height: 0;
+        grid-template-areas: "sidebar  main";
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 150px 1fr;
+    }
+
+    .item-main {
+        border: 1px solid black;
+        grid-area: main;
+        margin-left: 0%;
+        margin-top: 15%;
+    }
+
+    #searchContainer {
+        display: flex;
+        flex-direction: row;
+        padding-left: 40px;
+    }
+
+    #searchContainerNew {
+        flex-direction: row;
+        padding-left: 40px;
+        display: none;
+    }
+}
+
+@media (max-width: 770px) {
+    .print-cluster {
+        grid-column: 1 / span 5;
+    }
+}
+
+
+.space {
+    word-spacing: 80px;
+}
+
+.spantext {
+    font-size:30px;cursor:pointer
+}
+
+
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/*__________________________________*/
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}

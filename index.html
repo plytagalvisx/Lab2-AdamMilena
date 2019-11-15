@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+    <link rel="stylesheet" href="src/view/style.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css"/>
+
+</head>
+<body>
+<div class="container page-content">
+    <div id="container-header" style="display:none">
+        Dinner Planner
+    </div>
+    <div id="loader" class="spinner-border" role="status" style="display:none">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div id="container-subheading" style="display:none">
+    </div>
+    <div id="container-home" style="display:none">
+    </div>
+    <div id="container-sidebar" class="grid-sidebar" style="display:none">
+       <!-- <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        </div>
+
+        <p>Click on the element below to open the right-sided navigation menu.</p>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+
+        <style>
+            /* The side navigation menu */
+            .sidenav {
+                height: 100%; /* 100% Full-height */
+                width: 0; /* 0 width - change this with JavaScript */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Stay on top */
+                top: 0; /* Stay at the top */
+                left: 0;
+                background-color: #111; /* Black*/
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 60px; /* Place content 60px from the top */
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+            }
+
+            /* The navigation menu links */
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+        </style> -->
+    </div>
+    <div id="container-details" style="display:none">
+    </div>
+    <div id="container-search" class="grid-search" style="display:none">
+    </div>
+    <div id="container-overview" style="display:none">
+    </div>
+    <div id="container-print" style="display:none">
+    </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<!-- The application JavaScript code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.5.2/redux.js"></script>
+<script src="src/model/apiConfig.js"></script>
+<script src="src/model/dinnerModel.js"></script>
+<script src="src/view/overviewView.js"></script>
+<script src="src/view/homeView.js"></script>
+<script src="src/view/searchView.js"></script>
+<script src="src/view/PrintOutView.js"></script>
+<script src="src/view/SubheadingView.js"></script>
+<script src="src/view/detailsView.js"></script>
+<script src="src/view/sidebarView.js"></script>
+<script src="src/app.js"></script>
+
+</body>
+</html>
