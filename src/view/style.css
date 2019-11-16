@@ -471,6 +471,7 @@ img {
     text-align: left;
     outline: none;
     font-size: 15px;
+    display: inline;
 }
 
 .active, .collapsible:hover {
