@@ -1,48 +1,56 @@
+/* General styling */
+
 body {
-    display: flex;
-    flex: 1;
     margin: 0;
     padding: 0;
-    flex-direction: column;
     font-family: Comic Sans MS, serif;
     box-sizing: border-box;
-}
-
-.grid-sidebar {
-    display: grid;
-    width: 20%;
-    height: 0;
-    grid-template-areas: "sidebar  main";
-    grid-template-rows: 50px 1fr 30px;
-    grid-template-columns: 150px 1fr;
-}
-
-.grid-search {
-    display: grid;
-    width: 100%;
-    height: 0;
-    grid-template-areas: "sidebar  main";
-    grid-template-rows: 50px 1fr 30px;
-    grid-template-columns: 150px 1fr;
-}
-
-#content-grid {
-    display: flex;
-    flex-direction: row;
 }
 
 img {
     border: 5px solid black;
 }
 
+.container-page-content {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 50px max-content;
+}
+
+#container-sidebar {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+
+#container-search {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+@media (max-width: 450px) {
+    #container-search {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+    }
+}
+
 #container-header {
+    grid-column: 1 / span 2;
     background-color: lightgrey;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    height: 50px;
+}
+
+#container-overview {
+    grid-column: 1 / span 2;
+    grid-row: 2;
 }
 
 #container-home {
+    grid-column: 1 / span 2;
+    grid-row: 2;
     display: flex;
     flex: 1;
     flex-direction: row;
@@ -50,52 +58,6 @@ img {
     text-align: center;
     justify-content: center;
     margin-top: 10%;
-}
-
-#container-search {
-    display: flex;
-    flex-direction: row;
-}
-
-#searchContainer {
-    display: flex;
-    flex-direction: row;
-    padding-left: 40px;
-}
-
-#find-a-dish-text {
-    padding-right: 230px;
-}
-
-#padding-down {
-    padding-top: 50px;
-}
-
-.divMiddleHeight {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.divMiddleWidth {
-    flex: 0.4;
-    display: flex;
-}
-
-#divBorder {
-    border: 1px solid;
-    text-align: center;
-}
-
-#divBorderNothing {
-    border: 1px solid white;
-    text-align: center;
-}
-
-#divBorderInput {
-    border: 1px solid;
-    text-align: center;
-    color: darkgrey;
 }
 
 #text-center {
@@ -122,17 +84,6 @@ img {
     background-color: white;
 }
 
-.sidebarBtn {
-    cursor: pointer;
-    color: #212529;
-    background-color: #f6b26b;
-    border-color: #212529;
-    /*padding-left: 25px;
-    padding-right: 25px;*/
-    border-right: solid;
-    border-bottom: solid;
-}
-
 .flex-content-Btn {
     display: flex;
 }
@@ -140,16 +91,6 @@ img {
 #flexBtn {
     flex: 1;
     flex-direction: row;
-}
-
-#search-dish-button {
-    border-right: solid;
-    border-bottom: solid;
-    cursor: pointer;
-    color: #212529;
-    background-color: #f6b26b;
-    border-color: #212529;
-    margin-left: 10px;
 }
 
 .item-sidebar {
@@ -161,6 +102,7 @@ img {
     border: 1px solid black;
     grid-area: main;
     margin-left: 20%;
+    display: none;
 }
 
 .subheading {
@@ -183,7 +125,6 @@ img {
     padding: 5px;
     font-size: 1rem;
     text-align: left;
-    border-color: darkgrey;
 }
 
 #overview-persons {
@@ -195,7 +136,7 @@ img {
 }
 
 .my-dinner-text {
-    padding-right: 110px;
+    padding-right: 0;
 }
 
 .stretchBottom {
@@ -340,7 +281,9 @@ img {
     font-size: initial;
 }
 
+
 @media (max-width: 450px) {
+
     #overview-persons {
         font-size: small;
     }
@@ -369,34 +312,6 @@ img {
     #text-center {
         width: 80%;
     }
-
-    .grid-sidebar {
-        display: grid;
-        width: 100%;
-        height: 0;
-        grid-template-areas: "sidebar  main";
-        grid-template-rows: 50px 1fr 30px;
-        grid-template-columns: 150px 1fr;
-    }
-
-    .item-main {
-        border: 1px solid black;
-        grid-area: main;
-        margin-left: 0%;
-        margin-top: 15%;
-    }
-
-    #searchContainer {
-        display: flex;
-        flex-direction: row;
-        padding-left: 40px;
-    }
-
-    #searchContainerNew {
-        flex-direction: row;
-        padding-left: 40px;
-        display: none;
-    }
 }
 
 @media (max-width: 770px) {
@@ -406,81 +321,4 @@ img {
 }
 
 
-.space {
-    word-spacing: 80px;
-}
 
-.spantext {
-    font-size:30px;cursor:pointer
-}
-
-
-
-/* The side navigation menu */
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-
-/*__________________________________*/
-.collapsible {
-    background-color: #777;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    display: inline;
-}
-
-.active, .collapsible:hover {
-    background-color: #555;
-}
-
-.content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-}

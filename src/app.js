@@ -18,18 +18,6 @@ const makeWithAttr = (type, id, className, children) => {
   return ret;
 };
 
-const makeWithAttrAndStyle = (type, id, className, style, children) => {
-    let ret = document.createElement(type);
-    ret.id = id;
-    ret.style.cssText = style;
-    ret.setAttribute("class", className);
-    if(children instanceof Array)
-        ret.append(... children);
-    else
-        ret.append(children);
-    return ret;
-};
-
 const makeImage = (id, className, path) => {
   let ret = document.createElement("img");
   ret.id = id;
@@ -49,30 +37,13 @@ const makeInput= (id, type, value, step, min, placeholder) => {
     return ret;
 };
 
-const makeHyperlink = (href, id, className, onclickType, children) => {
-    const ret = document.createElement("a");
-    ret.href = href;
+const makeButton = (id, className, onclick) => {
+    const ret= document.createElement("button");
     ret.id = id;
+    ret.onclick = onclick;
     ret.setAttribute("class", className);
-    ret.onclick = onclickType;
-    if(children instanceof Array)
-        ret.append(... children);
-    else
-        ret.append(children);
     return ret;
-}
-
-const makeSpan = (id, className, onclickType, children) => {
-    const ret = document.createElement("span");
-    ret.id = id;
-    ret.setAttribute("class", className);
-    ret.onclick = onclickType;
-    if(children instanceof Array)
-        ret.append(... children);
-    else
-        ret.append(children);
-    return ret;
-}
+};
 
 // helper function to find the container by short name
 const container=function(containerName){

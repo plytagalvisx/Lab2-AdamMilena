@@ -1,89 +1,65 @@
-class SidebarView
-{
-    constructor(container, model) {
-        this.container = container;
-        this.model = model;
-    }
+class SidebarView {
+  constructor(container, model) {
+    this.container = container;
+    this.model = model;
+  }
 
-    render() {
-        this.container.append(
-           makeWithAttr("div", "sidebarContainer", "", [
-               makeWithAttr("div", "collapsibleSidebar", "", [
+  render() {
+      this.container.append(
+          makeWithAttr("div", "" , "grid-sidebar", [
+              makeWithAttr("div", "sidebar-top", "", [
+                  makeWithAttr("div","","","My Dinner"),
+                  makeWithAttr("a", "collapse-sidebar-btn", "hamburger",""),
 
-               // makeWithAttr("button", "", "collapsible", "Collapsing Sidebar"),
-               // makeWithAttr("div", "", "content", [
-                   // makeWithAttr("p", "", "", [
-                        makeWithAttr("div", "sideBarView", "item-sidebar", [
-                            makeWithAttr("div", "", "stretchBottom", [
-                                makeWithAttr("h3", "", "my-dinner-text", "My Dinner"),
-                                makeWithAttr("p", "", "", "People"),
-                                makeInput("inputNumOfPeople", "number", "0", "1", "0", ""),
-                                make("br", ""),
-                                makeWithAttr("div", "divBorder","space", ["DishName ", " Cost"]),
-                                makeWithAttr("div", "divBorderNothing", "space", ["Lasagne ", "SEK"]),
-                                make("br", ""),
+              ]),
+              makeWithAttr("div", "", "collapsible", [
+                  makeWithAttr("div", "sidebar-people" ,"" ,"People"),
+                  makeInput("sidebar-num-people", "number" ,"0","1","0",""),
+                  makeWithAttr("div", "", "flex-between", [
+                    makeWithAttr("div", "", "", "Dish Name"),
+                    makeWithAttr("div", "", "", "Cost"),
+                  ]),
+                  /*
+                  sidebar-dishes fylls från modellen, innehåller är endast platshållare
+                   */
+                  makeWithAttr("div", "sidebar-dishes", "", [
+                      makeWithAttr("div","", "flex-between", [
+                          make("div", "Pizza"),
+                          make("div", "20kr")
+                      ]),
+                      makeWithAttr("div","", "flex-between", [
+                          make("div", "Pizza"),
+                          make("div", "20kr")
+                      ]),
+                      makeWithAttr("div","", "flex-between", [
+                          make("div", "Pizza"),
+                          make("div", "20kr")
+                      ])
+                  ])
+              ])
+          ])
+      );
+      this.afterRender();
+  }
 
-                                makeWithAttr("div", "", "flex-content-Btn", [
-                                    makeWithAttr("button", "flexBtn", "sidebarBtn", "Confirm Dinner") ]) ])
+  afterRender() {
+      /*
+      Hide and show menu in mobile view.
+       */
+      let button = this.container.querySelector("#collapse-sidebar-btn");
+      let collapsible = this.container.querySelector(".collapsible");
+      let listener = function() {
+        if(collapsible.style.display === "none")
+            collapsible.style.display = "grid";
+        else
+            collapsible.style.display = "none";
+      };
+      button.addEventListener('click', listener, false);
 
-                        ])//,
-                    //])
-                //]),
-
-                       /*makeWithAttr("script", "", "", "var coll = document.getElementsByClassName(\"collapsible\");\n" +
-                           "                var i;\n" +
-                           "\n" +
-                           "                for (i = 0; i < coll.length; i++) {\n" +
-                           "                    coll[i].addEventListener(\"click\", function() {\n" +
-                           "                        this.classList.toggle(\"active\");\n" +
-                           "                        var content = this.nextElementSibling;\n" +
-                           "                        if (content.style.display === \"block\") {\n" +
-                           "                            content.style.display = \"none\";\n" +
-                           "                        } else {\n" +
-                           "                            content.style.display = \"block\";\n" +
-                           "                        }\n" +
-                           "                    });\n" +
-                           "                }" +
-                           "")*/
-
-               ])
-
-                /*makeWithAttr("script", "", "", "var w = window.innerWidth;\n" +
-                    "var ww = (window.innerWidth >= 450);\n" +
-                    "\n" +
-                    "if(ww === true) {" +
-                    "document.getElementById(\"searchContainer\").innerHTML;" +
-                    "} else {" +
-                    "document.getElementById(\"searchContainer\").innerHTML = \"Width: \" + w; " +
-                    "}" +
-                    "")*/
-            ]),
-
-               makeWithAttr("script", "", "", "function displayWindowSize(){\n" +
-                   "        var w = window.innerWidth;\n" +
-                   "        \n" +
-                   "        if(w <= 700) {\n" +
-                   "        document.getElementById(\"collapsibleSidebar\").innerHTML = \"Smaller: \" + w; " +
-                   "        }\n" +
-                   "        else {\n" +
-                   "        document.getElementById(\"collapsibleSidebar\").innerHTML = \"Larger: \" + w; " +
-                   "        }\n" +
-                   "    }\n" +
-                   "     \n" +
-                   "    window.addEventListener(\"resize\", displayWindowSize);\n" +
-                   "    \n" +
-                   "    displayWindowSize();")
-
-        );
+      /*
+      Fetch data from model.
+       */
 
 
-    }
-        afterRender()
-        {
-
-        }
-    }
-
-
-
-
+  }
+}
