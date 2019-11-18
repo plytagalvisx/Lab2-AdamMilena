@@ -3,10 +3,17 @@
     grid-row: 2;
 
     display: grid;
-    height: 100%;
+    height: calc(100vh - 50px);
     width: 100%;
-    grid-template-rows: 50px;
+    grid-template-rows: 50px max-content;
     grid-template-columns: 20% 80%;
+    background-color: yellow;
+}
+
+@media (max-width: 450px) {
+    .grid-sidebar {
+        height: auto;
+    }
 }
 
 #sidebar-top {
@@ -39,12 +46,18 @@
 
 .collapsible {
     grid-column: 1;
-    grid-row: 2 / span;
+    grid-row: 2;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: teal;
     border: 2px solid black;
+}
+
+@media (min-width: 450px) {
+    .collapsible {
+        display: grid;
+    }
 }
 
 #sidebar-people {
@@ -78,6 +91,13 @@
     background-color: orange;
 }
 
+#sidebar-confirm {
+    grid-column: 1 / span 4;
+    background-color: darkgoldenrod;
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
 
 @media (min-width: 450px) {
     .hamburger {

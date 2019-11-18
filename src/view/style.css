@@ -1,5 +1,4 @@
-/* General styling */
-
+/* This stylesheet only contains general styling */
 body {
     margin: 0;
     padding: 0;
@@ -14,7 +13,7 @@ img {
 .container-page-content {
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-template-rows: 50px max-content;
+    grid-template-rows: repeat(10, 50px);
 }
 
 #container-sidebar {
@@ -22,7 +21,17 @@ img {
     grid-row: 2;
 }
 
+#container-print {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+}
+
 #container-search {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#container-details {
     grid-column: 2;
     grid-row: 2;
 }
@@ -32,10 +41,21 @@ img {
         grid-column: 1 / span 2;
         grid-row: 3;
     }
+
+    #container-details {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+    }
+}
+
+#container-subheading {
+    grid-column: 1 / span 2;
+    grid-row: 2;
 }
 
 #container-header {
     grid-column: 1 / span 2;
+    grid-row: 1;
     background-color: lightgrey;
     text-align: center;
     font-size: 30px;
@@ -45,135 +65,14 @@ img {
 
 #container-overview {
     grid-column: 1 / span 2;
-    grid-row: 2;
+    grid-row: 3;
 }
 
 #container-home {
     grid-column: 1 / span 2;
-    grid-row: 2;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
+    grid-row: 3;
     font-size: 14px;
-    text-align: center;
-    justify-content: center;
-    margin-top: 10%;
-}
 
-#text-center {
-    width: 40%;
-    text-align: center;
-    display: flex;
-}
-
-.btn{
-    width: 200px;
-    height: auto;
-    background: orange;
-    display: inline-block;
-    padding: 1%;
-    border: 1px solid black;
-    margin-bottom: 0.3em;
-    margin-right: 0.3em;
-    text-align:center;
-    box-shadow: 2px 2px black;
-}
-
-.btn:hover{
-    color: black;
-    background-color: white;
-}
-
-.flex-content-Btn {
-    display: flex;
-}
-
-#flexBtn {
-    flex: 1;
-    flex-direction: row;
-}
-
-.item-sidebar {
-    border: 1px solid black;
-    grid-area: sidebar;
-}
-
-.item-main {
-    border: 1px solid black;
-    grid-area: main;
-    margin-left: 20%;
-    display: none;
-}
-
-.subheading {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    border-top: grey solid 3px;
-    border-bottom: black solid 3px;
-}
-
-#inputNumOfPeople {
-    margin-left: 10px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    width: 30px;
-    height: 20px;
-    padding: 5px;
-    font-size: 1rem;
-    text-align: left;
-}
-
-#overview-persons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 20%;
-    font-size: 18px;
-}
-
-.my-dinner-text {
-    padding-right: 0;
-}
-
-.stretchBottom {
-    margin-bottom: 500px;
-}
-
-/* Source for backBtn style: http://html-tuts.com/css-arrows-up-down-left-right-triangle/ */
-#backBtn {
-    display: inline-block;
-    position: relative;
-    background: orange;
-    padding: 5px;
-    margin: 10px;
-}
-
-#backBtn:after {
-    content: '';
-    display: block;
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    margin-top: -10px;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-right: 10px solid orange;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid transparent;
-}
-
-#backBtn:hover {
-    color: black;
-    background-color: white;
-}
-
-#backBtn:hover:after {
-    border-right: 10px solid white;
 }
 
 .main {
@@ -184,141 +83,4 @@ img {
     background-color: white;
     align-items: center;
 }
-
-#horiline {
-    width: 80%;
-    border-bottom: 3px solid darkgray;
-    margin: 2%;
-}
-
-#vertline {
-    border-left: 3px solid darkgray;
-    margin: 2%;
-}
-
-#dishes-container {
-    display:flex;
-    flex: 1;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    list-style: none;
-}
-
-#dishes-items {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    padding: 1%;
-    text-align: center;
-}
-
-.dish-image {
-    object-fit: contain;
-    border: 3px solid black;
-    margin: 0;
-    padding: 0;
-}
-
-.dish-text {
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    margin: 0;
-    padding: 0;
-}
-
-.dish {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px;
-    max-width: 200px;
-    max-height: 200px;
-}
-
-#price-container {
-    text-align: left;
-    padding: 10px;
-    align-self: flex-end;
-}
-
-#print-container {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: 15% 30% 10% 30% 15%;
-    grid-template-rows: auto;
-}
-
-.print-cluster {
-    grid-column: 2 / span 3;
-    display: grid;
-    grid-template-columns: 35% 25% 40%;
-    grid-template-rows: auto;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    font-weight: bold;
-    font-size: large;
-}
-
-.print-image {
-    grid-column: 1 / 1;
-    max-width: 90%;
-    border: 2px solid black;
-}
-
-.dish-title {
-    grid-column: 2 / 2;
-}
-
-.dish-instructions {
-    grid-column: 3 / 3;
-    font-weight: normal;
-    font-size: initial;
-}
-
-
-@media (max-width: 450px) {
-
-    #overview-persons {
-        font-size: small;
-    }
-
-    .print-cluster {
-        grid-column: 1 / span 5;
-        font-size: small;
-    }
-
-    .dish-instructions {
-        font-size: small;
-    }
-
-    #overview-persons {
-        width: 30%;
-    }
-
-    #backBtn {
-        font-size: small;
-    }
-
-    #dishes-items {
-        flex-direction: column;
-    }
-
-    #text-center {
-        width: 80%;
-    }
-}
-
-@media (max-width: 770px) {
-    .print-cluster {
-        grid-column: 1 / span 5;
-    }
-}
-
-
 

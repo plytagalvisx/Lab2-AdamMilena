@@ -17,7 +17,7 @@ class OverviewView {
                 ]),
                 makeWithAttr("div", "horiline", "", ""),
 
-                makeWithAttr("div", "toPrintBtn", "btn", "Print full recipe")
+                makeWithAttr("div", "toPrintBtn", "", "Print full recipe")
             ])
         );
         this.afterRender();

@@ -20,23 +20,16 @@ class SidebarView {
                     makeWithAttr("div", "", "", "Cost"),
                   ]),
                   /*
-                  sidebar-dishes fylls från modellen, innehåller är endast platshållare
+                  sidebar-dishes and sidebar-cost are filled in afterRender().
                    */
-                  makeWithAttr("div", "sidebar-dishes", "", [
-                      makeWithAttr("div","", "flex-between", [
-                          make("div", "Pizza"),
-                          make("div", "20kr")
-                      ]),
-                      makeWithAttr("div","", "flex-between", [
-                          make("div", "Pizza"),
-                          make("div", "20kr")
-                      ]),
-                      makeWithAttr("div","", "flex-between", [
-                          make("div", "Pizza"),
-                          make("div", "20kr")
-                      ])
-                  ])
-              ])
+                  makeWithAttr("div", "sidebar-dishes", "", ""),
+                  makeWithAttr("div", "sidebar-cost" ,"", ""),
+
+                  makeWithAttr("div", "sidebar-confirm", "",
+                      makeWithAttr("a", "", "btn", "Confirm Dinner")),
+
+              ]),
+
           ])
       );
       this.afterRender();
@@ -59,6 +52,19 @@ class SidebarView {
       /*
       Fetch data from model.
        */
+      let dishes = this.model.getFullMenu();
+      dishes.map(dish =>  {
+          this.container.querySelector("#sidebar-dishes").append(
+              makeWithAttr("div", "", "flex-between", [
+                  make("div", dish.title),
+                  make("div", dish.pricePerServing * this.model.getNumberOfGuests()),
+              ])
+          );
+      });
+
+      this.container.querySelector("#sidebar-cost").append(
+          make("div", "SEK " + this.model.getTotalMenuPrice())
+      );
 
 
   }

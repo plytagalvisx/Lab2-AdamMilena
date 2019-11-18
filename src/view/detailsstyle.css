@@ -1,0 +1,54 @@
+.flex-between-details {
+    grid-column: 1 / span 4;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ingredientsBackground {
+    width: 100%;
+    background-color: #ffe59e;
+    border: 2px solid #363636;
+    padding-bottom: 400px;
+}
+
+.leftSideDescription {
+    width: 100%;
+    border: 2px solid #363636;
+    padding-bottom: 400px;
+}
+
+.ingredientsText {
+    margin-left: 30px;
+}
+
+.dishDetailsImage {
+    object-fit: contain;
+    border: 3px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.dishDetails {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    max-width: 400px;
+    max-height: 200px;
+}
+
+.grid-details {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-rows: 50px max-content;
+    grid-template-columns: 20% 80%;
+    background-color: mediumspringgreen;
+    border-left: 2px solid black;
+}
+
+@media (max-width: 450px) {
+    .grid-details {
+        border: 0;
+    }
+}

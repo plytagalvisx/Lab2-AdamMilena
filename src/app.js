@@ -56,7 +56,8 @@ const screens = {
   home: ["header", "home"],
   search: ["header", "sidebar", "search"],
   overview: ["header", "subheading", "overview"],
-  print: ["header", "subheading", "print"]
+  print: ["header", "subheading", "print"],
+  details: ["header", "sidebar", "details"]
 };
 
 // switching between screens
@@ -77,7 +78,7 @@ window.onload = function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
-  model.setNumberOfGuests(1);
+  model.setNumberOfGuests(2);
 
   Promise.all([model.getDish(453), model.getDish(5)])
       .then(function(values) {
@@ -90,6 +91,7 @@ window.onload = function () {
         new SearchView(container("search"), model).render();
         new PrintOutView(container("print"), model).render();
         new SidebarView(container("sidebar"), model).render();
+        new DetailsView(container("details"), model).render();
 
         show("search");
       });
