@@ -8,24 +8,18 @@
     border-left: 2px solid black;
 }
 
-@media (max-width: 450px) {
-    .grid-search {
-        border: 0;
-    }
-}
-
-#sidebar-top-search {
+/*#sidebar-top-search {
     grid-column: 1 / 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+}*/
 
-@media (max-width: 450px) {
+/*@media (max-width: 450px) {
     #sidebar-top-search {
         grid-column: 1 / 1;
     }
-}
+}*/
 
 #search-dish-button {
     border-right: solid;
@@ -65,13 +59,16 @@
     height: 100%;
     justify-content: center;
     padding-bottom: 100px;
+    /* Är det bättre att ha padding-bottom procentuellt? */
+    /*padding-bottom: 15%;*/
+
 }
 
-.lowerSearchPart {
+/*.lowerSearchPart {
     padding-left: 35px;
     display: flex;
     flex-direction: row;
-}
+}*/
 
 #dishes-items {
     display: flex;
@@ -81,3 +78,17 @@
     text-align: center;
 }
 
+@media (max-width: 450px) {
+    .grid-search {
+        border: 0;
+    }
+
+    .flex-between-search {
+        display: none;
+    }
+
+    .flex-between-search2 {
+        margin-top: -52px;
+        padding-bottom: 100%;
+    }
+}
