@@ -12,7 +12,7 @@ class SubheadingView {
                     makeWithAttr("p","numGuests", "",""),
                     makeWithAttr("p", "people", "", "")
                 ]),
-                makeWithAttr("a", "backBtn", "", "Go back and edit dinner")
+                makeWithAttr("a", "backBtn", "backBtn", "Go back and edit dinner")
             ])
         );
         this.afterRender();

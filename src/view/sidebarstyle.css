@@ -25,6 +25,9 @@
     align-items: center;
 }
 
+/*
+Source for hamburger style: https://superdevresources.com/css-hamburger-menu/
+ */
 .hamburger {
     position: relative;
     display: inline-block;

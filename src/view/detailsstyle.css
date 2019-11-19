@@ -1,54 +1,78 @@
-.flex-between-details {
-    grid-column: 1 / span 4;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.ingredientsBackground {
-    width: 100%;
-    background-color: #ffe59e;
-    border: 2px solid #363636;
-    padding-bottom: 400px;
-}
-
-.leftSideDescription {
-    width: 100%;
-    border: 2px solid #363636;
-    padding-bottom: 400px;
-}
-
-.ingredientsText {
-    margin-left: 30px;
-}
-
-.dishDetailsImage {
-    object-fit: contain;
-    border: 3px solid black;
-    margin: 0;
-    padding: 0;
-}
-
-.dishDetails {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px;
-    max-width: 400px;
-    max-height: 200px;
-}
-
-.grid-details {
+#details-container {
     display: grid;
-    height: 100%;
-    width: 100%;
-    grid-template-rows: 50px max-content;
-    grid-template-columns: 20% 80%;
-    background-color: mediumspringgreen;
-    border-left: 2px solid black;
+    grid-template-columns: 4% 48% 48%;
+    grid-template-rows: 50px repeat(2, 300px) 50px 200px;
+    grid-column-gap: 2%;
 }
 
-@media (max-width: 450px) {
-    .grid-details {
-        border: 0;
-    }
+#details-heading {
+    grid-column: 2;
+    grid-row: 1;
+    background-color: teal;
+    margin-top: 2%;
+}
+
+.details-heading {
+    font-size: large;
+    font-weight: bold;
+}
+
+.details-text {
+    font-size: initial;
+    font-weight: normal;
+}
+
+#details-ingredients {
+    grid-column: 3;
+    grid-row: 1 / span 3;
+    background-color: violet;
+
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: repeat(10, 50px);
+}
+
+#details-ingredient-header {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    margin-top: 2%;
+    font-weight: bold;
+}
+
+.amount {
+    grid-column: 1;
+}
+
+.ingredient {
+    grid-column: 2;
+}
+
+#details-left-container {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    max-width: available;
+    max-height: available;
+}
+
+.details-image {
+    max-width: 100%;
+    object-fit: contain;
+    border: none;
+}
+
+#details-image-text {
+    font-size: large;
+    max-height: 100%;
+}
+
+#details-preparation {
+    grid-row: 5;
+    grid-column: 2 / span 3;
+}
+
+#backToSearchBtn {
+    grid-column: 2;
+    grid-row: 4;
+    width: 150px;
+    text-align: center;
 }

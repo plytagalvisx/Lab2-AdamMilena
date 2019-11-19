@@ -53,11 +53,12 @@ const container=function(containerName){
 // the View containers will not all be visible at the same time.
 // Various screens will show different Views
 const screens = {
-  home: ["header", "home"],
-  search: ["header", "sidebar", "search"],
-  overview: ["header", "subheading", "overview"],
-  print: ["header", "subheading", "print"],
-  details: ["header", "sidebar", "details"]
+    loader: ["loader"],
+    home: ["header", "home"],
+    search: ["header", "sidebar", "search"],
+    overview: ["header", "subheading", "overview"],
+    print: ["header", "subheading", "print"],
+    details: ["header", "sidebar", "details"],
 };
 
 // switching between screens
@@ -66,7 +67,7 @@ const show = function(screenName) {
   // optional FIXME: we could avoid hiding the containers that are part of the screen to be shown
   // optional FIXME: finding the containers could be done automatically
   // by looking at document.body.firstChild.children
-  ["header", "home", "overview", "search", "sidebar", "print", "subheading"]
+  ["header", "home", "overview", "search", "sidebar", "print", "subheading", "details", "loader"]
       .forEach(containerName => container(containerName).style.display="none");
 
   // now we show all the Views used by the indicated screen
@@ -74,15 +75,33 @@ const show = function(screenName) {
       .forEach(containerName => container(containerName).style.display = "block");
 };
 
+/*
+const hasHasChanged = function () {
+    this.router.hashHasChanged(container);
+};
+*/
+
 window.onload = function () {
+
+/*    window.location.hash = '';
+
+    window.addEventListener("hashchange", hashHasChanged, false);*/
+
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
   model.setNumberOfGuests(2);
+  new LoaderView(container("loader"), model).render();
+
+  show("loader");
+
+
+    // start loader
 
   Promise.all([model.getDish(453), model.getDish(5)])
       .then(function(values) {
 
+          // stop loader
         for(const element of values)
           model.addDishToMenu(element);
         new HomeView(container("home"), model).render();
@@ -94,6 +113,7 @@ window.onload = function () {
         new DetailsView(container("details"), model).render();
 
         show("search");
-      });
+      })
+      .catch(console.error);
 
 };

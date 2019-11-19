@@ -18,7 +18,7 @@
 }
 
 /* Source for backBtn style: http://html-tuts.com/css-arrows-up-down-left-right-triangle/ */
-#backBtn {
+.backBtn {
     display: inline-block;
     position: relative;
     background: orange;
@@ -26,7 +26,7 @@
     margin: 10px;
 }
 
-#backBtn:after {
+.backBtn:after {
     content: '';
     display: block;
     position: absolute;
@@ -41,12 +41,12 @@
     border-left: 10px solid transparent;
 }
 
-#backBtn:hover {
+.backBtn:hover {
     color: black;
     background-color: white;
 }
 
-#backBtn:hover:after {
+.backBtn:hover:after {
     border-right: 10px solid white;
 }
 
