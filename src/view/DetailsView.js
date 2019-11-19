@@ -7,7 +7,6 @@ class DetailsView {
     render() {
         this.container.append(
             makeWithAttr("div", "details-container", "", [
-                makeWithAttr("div", "details-heading", "details-heading", "Lasagne"),
                 makeWithAttr("div", "details-ingredients", "", [
                     makeWithAttr("div", "details-ingredient-header", "ingredient", ""),
 
@@ -30,6 +29,7 @@ class DetailsView {
         let dish = dishes[0];
         let guests = this.model.getNumberOfGuests();
         this.container.querySelector("#details-left-container").append(
+            makeWithAttr("div", "", "details-heading", dish.title),
             makeImage("","details-image",dish.image),
             makeWithAttr("div", "details-image-text", "", dish.winePairing.pairingText),
         );
@@ -41,10 +41,11 @@ class DetailsView {
         this.container.querySelector("#details-ingredient-header").textContent = ("Ingredients for " + this.model.getNumberOfGuests() + " people");
         dish.extendedIngredients.map(ingredient => {
            this.container.querySelector("#details-ingredients").append(
-               makeWithAttr("div", "", "amount", ingredient.amount*guests + " " + ingredient.measures.metric.unitShort),
-               makeWithAttr("div","","ingredient", ingredient.name)
+               makeWithAttr("div", "", "details-ingredient-dish", [
+                   makeWithAttr("div", "" ,"amount", ingredient.amount*guests + " " + ingredient.measures.metric.unitShort),
+                   makeWithAttr("div","","ingredient", ingredient.name)
+               ]),
            )
         });
-
     }
 }

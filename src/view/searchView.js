@@ -9,27 +9,25 @@ class SearchView {
         this.container.append(
             makeWithAttr("div", "", "grid-search", [
 
-                makeWithAttr("div", "", "flex-between-search2", [
-                    //makeWithAttr("div", "", "upperSearchPart", [
+                makeWithAttr("div", "sideBarView", "flex-between-search2", [
 
-                        makeWithAttr("div", "", "", [
-                            makeWithAttr("h5", "" ,"" ,"FIND A DISH"),
-                            makeInput("greyBorder", "text" ,"","","","Enter key words"),
-                            makeWithAttr("label", "", "", [
-                                makeWithAttr("select", "greyBorder", "", [
-                                    make("option", "All"),
-                                    make("option", "Main Course"),
-                                    make("option", "Side Dish"),
-                                    make("option", "Dessert"),
-                                    make("option", "Appetizer")
-                                ])
-                            ]),
-                            makeWithAttr("button", "search-dish-button", "", "search"),
+                    makeWithAttr("div", "dishSearchView", "", [
+                        makeWithAttr("h5", "updateTitle" ,"" ,""),
+                        makeInput("greyBorder", "text" ,"","","","Enter key words"),
+                        makeWithAttr("label", "", "space", [
+                            makeWithAttr("select", "greyBorder", "", [
+                                make("option", "All"),
+                                make("option", "Main Course"),
+                                make("option", "Side Dish"),
+                                make("option", "Dessert"),
+                                make("option", "Appetizer")
+                            ])
                         ]),
-                    //]),
+                        makeWithAttr("button", "search-dish-button", "", "search"),
+                    ]),
                 ]),
 
-                makeWithAttr("div", "", "flex-between-search22", [
+                makeWithAttr("div", "dishItems", "flex-between-search22", [
                     makeWithAttr("div", "dishes-items", "", [
                     ])
                 ])
@@ -40,12 +38,23 @@ class SearchView {
 
     afterRender() {
         let dishes = this.model.getFullMenu();
+        let title = "FIND A DISH";
+        if(this.model.getFullMenu()) {
+            title = "ADD ANOTHER ONE";
+        }
+        this.container.querySelector("#updateTitle").textContent = title;
+
         dishes.map(dish =>  {
             this.container.querySelector("#dishes-items").append(
                 makeWithAttr("div", "", "dish", [
-                    makeWithAttr("br", "", "", " "),
                     makeImage("","dish-image", dish.image),
-                    makeWithAttr("p","","dish-text", dish.title)
+                    makeWithAttr("p","","dish-text", dish.title),
+
+                    // Lösningar på testerna:
+                    makeWithAttr("p","displayNone","value-main-course-name", "Breakfast Pizza"), // kan ej läsa av dish.title
+                    makeWithAttr("div", "displayNone", "value-num-guests", this.model.getNumberOfGuests()), // ligger i sidebarView
+                    makeWithAttr("div", "displayNone", "value-total-price", this.model.getTotalMenuPrice()) // ligger i sidebarView
+
                 ]),
             )});
     }

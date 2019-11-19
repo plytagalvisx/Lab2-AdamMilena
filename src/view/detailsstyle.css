@@ -1,20 +1,23 @@
 #details-container {
     display: grid;
     grid-template-columns: 4% 48% 48%;
-    grid-template-rows: 50px repeat(2, 300px) 50px 200px;
+    grid-template-rows: auto;
     grid-column-gap: 2%;
+    z-index: 1;
+
 }
 
-#details-heading {
-    grid-column: 2;
-    grid-row: 1;
-    background-color: teal;
-    margin-top: 2%;
+@media (max-width: 450px) {
+    #details-container {
+        grid-template-columns: 100%;
+        grid-column-gap: 0;
+    }
 }
 
 .details-heading {
     font-size: large;
     font-weight: bold;
+    margin-top: 2%;
 }
 
 .details-text {
@@ -24,19 +27,28 @@
 
 #details-ingredients {
     grid-column: 3;
-    grid-row: 1 / span 3;
-    background-color: violet;
+    grid-row: 1;
+    margin-right: 10%;
+    background-color: coral;
+    border: 2px solid black;
 
-    display: grid;
-    grid-template-columns: 100px auto;
-    grid-template-rows: repeat(10, 50px);
+    display: flex;
+    height: auto;
+    flex: 1;
+    flex-direction: column;
 }
 
-#details-ingredient-header {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-    margin-top: 2%;
-    font-weight: bold;
+@media (max-width: 450px) {
+    #details-ingredients {
+        grid-column: 1;
+        grid-row: 5;
+        margin-right: 0;
+    }
+}
+
+.details-ingredient-dish {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .amount {
@@ -47,11 +59,24 @@
     grid-column: 2;
 }
 
+#details-ingredient-header {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    margin-top: 2%;
+    font-weight: bold;
+}
+
 #details-left-container {
     grid-column: 2;
-    grid-row: 2 / span 3;
+    grid-row: 1 / span 3;
     max-width: available;
     max-height: available;
+}
+
+@media (max-width: 450px) {
+    #details-left-container {
+        grid-column: 1;
+    }
 }
 
 .details-image {
@@ -61,13 +86,21 @@
 }
 
 #details-image-text {
-    font-size: large;
+    font-size: small;
     max-height: 100%;
 }
 
 #details-preparation {
     grid-row: 5;
-    grid-column: 2 / span 3;
+    grid-column: 2;
+}
+
+@media (max-width: 450px) {
+    #details-preparation {
+        grid-column: 1;
+        grid-row: 6;
+        text-align: justify;
+    }
 }
 
 #backToSearchBtn {
@@ -75,4 +108,10 @@
     grid-row: 4;
     width: 150px;
     text-align: center;
+}
+
+@media (max-width: 450px) {
+    #backToSearchBtn {
+        grid-column: 1;
+    }
 }

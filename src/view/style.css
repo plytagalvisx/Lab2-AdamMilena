@@ -21,9 +21,23 @@ img {
     grid-row: 2;
 }
 
+@media (max-width: 450px) {
+    #container-sidebar {
+        z-index: 2;
+    }
+}
+
 #container-details {
     grid-column: 2;
     grid-row: 2;
+}
+
+@media (max-width: 450px) {
+    #container-details {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        z-index: 1;
+    }
 }
 
 #container-print {
@@ -40,6 +54,7 @@ img {
     #container-search {
         grid-column: 1 / span 2;
         grid-row: 3;
+        z-index: 1;
     }
 }
 
@@ -67,7 +82,6 @@ img {
     grid-column: 1 / span 2;
     grid-row: 3;
     font-size: 14px;
-
 }
 
 .main {
@@ -82,7 +96,11 @@ img {
 /*
 Source for loader: https://www.w3schools.com/howto/howto_css_loader.asp
  */
-#spinner {
+.spinner {
+    position: absolute;
+    left: 44%;
+    top: 38%;
+    z-index: 1;
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;

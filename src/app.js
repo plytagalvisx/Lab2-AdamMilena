@@ -91,17 +91,12 @@ window.onload = function () {
   //We instantiate our model
   const model = new DinnerModel();
   model.setNumberOfGuests(2);
-  new LoaderView(container("loader"), model).render();
 
   show("loader");
 
-
-    // start loader
-
-  Promise.all([model.getDish(453), model.getDish(5)])
+  Promise.all([model.getDish(453), model.getDish(559251)])
       .then(function(values) {
 
-          // stop loader
         for(const element of values)
           model.addDishToMenu(element);
         new HomeView(container("home"), model).render();
