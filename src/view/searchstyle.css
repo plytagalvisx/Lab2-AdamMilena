@@ -24,41 +24,19 @@
     display: none;
 }
 
-.upperSearchPart {
-    border: 2px solid
-    black;
-    padding-bottom: 110px;
-    padding-left: 35px;
-    margin-left: -5px;
-}
-
-.flex-between-search {
-    grid-column: 1 / span 4;
-    display: flex;
-    justify-content: space-evenly;
-    width: 50%;
-}
-
-.flex-between-search2 {
+.flex-between-search1 {
     grid-column: 1 / span 4;
     display: flex;
     justify-content: left;
     padding-left: 50px;
 }
 
-.flex-between-search22 {
+.flex-between-search2 {
     grid-column: 1 / span 4;
     display: flex;
     justify-content: center;
     margin-top: 10%;
     border-top: 2px solid black;
-}
-
-.flex-between-search3 {
-    grid-column: 2;
-    display: flex;
-    margin-left: -5px;
-    height: 100%;
 }
 
 #dishes-items {
@@ -78,11 +56,11 @@
         border: 0;
     }
 
-    .flex-between-search2 {
+    .flex-between-search1 {
         display: none;
     }
 
-    .flex-between-search22 {
+    .flex-between-search2 {
         grid-column: 1 / span 4;
         display: flex;
         margin-left: -5px;

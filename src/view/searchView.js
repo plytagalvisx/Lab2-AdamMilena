@@ -9,7 +9,7 @@ class SearchView {
         this.container.append(
             makeWithAttr("div", "", "grid-search", [
 
-                makeWithAttr("div", "sideBarView", "flex-between-search2", [
+                makeWithAttr("div", "sideBarView", "flex-between-search1", [
 
                     makeWithAttr("div", "dishSearchView", "", [
                         makeWithAttr("h5", "updateTitle" ,"" ,""),
@@ -27,7 +27,7 @@ class SearchView {
                     ]),
                 ]),
 
-                makeWithAttr("div", "dishItems", "flex-between-search22", [
+                makeWithAttr("div", "dishItems", "flex-between-search2", [
                     makeWithAttr("div", "dishes-items", "", [
                     ])
                 ])
