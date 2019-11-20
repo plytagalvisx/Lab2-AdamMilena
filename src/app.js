@@ -134,7 +134,7 @@ window.onload = function () {
             new SidebarView(container("sidebar"), model).render();
             new DetailsView(container("details"), model).render();
 
-            window.location.hash = 'home';
+            window.location.hash = 'search';
         })
         .catch(console.error);
 
