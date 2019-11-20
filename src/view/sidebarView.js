@@ -7,6 +7,7 @@ class SidebarView {
   render() {
       this.container.append(
           makeWithAttr("div", "" , "grid-sidebar", [
+
               makeWithAttr("div", "sidebar-top", "", [
                   makeWithAttr("div","","","My Dinner"),
                   makeWithAttr("a", "collapse-sidebar-btn", "hamburger",""),
@@ -26,7 +27,7 @@ class SidebarView {
                   makeWithAttr("div", "sidebar-cost" ,"", ""),
 
                   makeWithAttr("div", "sidebar-confirm", "",
-                      makeWithAttr("a", "", "btn", "Confirm Dinner")),
+                      makeButton("sidebarBtn", "startBtn", "#home", "Confirm Dinner")),
 
               ]),
 
@@ -55,7 +56,7 @@ class SidebarView {
       let dishes = this.model.getFullMenu();
       dishes.map(dish =>  {
           this.container.querySelector("#sidebar-dishes").append(
-              makeWithAttr("div", "", "flex-between", [
+              makeWithAttr("div", "", "flex-between-dishes", [
                   make("div", dish.title),
                   make("div", dish.pricePerServing * this.model.getNumberOfGuests()),
               ])
@@ -66,6 +67,7 @@ class SidebarView {
           make("div", "SEK " + this.model.getTotalMenuPrice())
       );
 
-
+      // Varför fungerar inte detta? Ska inte placeholder vara det som visas från början?
+      //this.container.querySelector("#sidebar-num-people").setAttribute("placeholder", this.model.getNumberOfGuests());
   }
 }

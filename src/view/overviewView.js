@@ -15,7 +15,7 @@ class OverviewView {
                         ]),
                     ]),
                 ]),
-                makeWithAttr("div", "horiline", "", ""),
+                makeWithAttr("div", "", "horiline", ""),
 
                 makeWithAttr("div", "toPrintBtn", "", "Print full recipe")
             ])

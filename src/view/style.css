@@ -8,6 +8,7 @@ body {
 
 img {
     border: 5px solid black;
+    object-fit: contain;
 }
 
 .container-page-content {

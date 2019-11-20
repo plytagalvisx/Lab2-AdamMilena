@@ -13,7 +13,6 @@ class PrintOutView {
 
     afterRender() {
         let dishes = this.model.getFullMenu();
-        console.log(dishes);
         dishes.map(dish =>  {
             this.container.querySelector("#print-container").append(
                 makeWithAttr("div", "", "print-cluster", [

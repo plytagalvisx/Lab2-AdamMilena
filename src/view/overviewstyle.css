@@ -19,10 +19,12 @@
 }
 
 .dish-image {
-    object-fit: contain;
     border: 3px solid black;
     margin: 0;
     padding: 0;
+    height: 200px;
+    /*max-width: 100%;*/
+    width: 200px;
 }
 
 .dish-text {
@@ -38,8 +40,9 @@
     flex-direction: column;
     text-align: center;
     padding: 10px;
-    max-width: 200px;
+    /*max-width: 200px;*/
     max-height: 200px;
+    max-width: 206px;
 }
 
 #toPrintBtn {
@@ -58,7 +61,7 @@
     background-color: white;
 }
 
-#horiline {
+.horiline {
     width: 80%;
     border-bottom: 3px solid darkgray;
     margin: 2%;

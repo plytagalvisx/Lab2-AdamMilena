@@ -19,10 +19,10 @@ const makeWithAttr = (type, id, className, children) => {
 };
 
 const makeImage = (id, className, path) => {
-  let ret = document.createElement("img");
+  let ret = document.createElement("div");
   ret.id = id;
   ret.setAttribute("class", className);
-  ret.src = path;
+  ret.setAttribute("style", "background: url('" + path + "'); background-size: cover; background-position: center;");
   return ret;
 };
 
@@ -37,11 +37,12 @@ const makeInput= (id, type, value, step, min, placeholder) => {
     return ret;
 };
 
-const makeButton = (id, className, onclick) => {
-    const ret= document.createElement("button");
+const makeButton = (id, className, href, children) => {
+    const ret= document.createElement("a");
     ret.id = id;
-    ret.onclick = onclick;
+    ret.href = href;
     ret.setAttribute("class", className);
+    ret.append(children);
     return ret;
 };
 
@@ -75,40 +76,66 @@ const show = function(screenName) {
       .forEach(containerName => container(containerName).style.display = "block");
 };
 
-/*
-const hasHasChanged = function () {
-    this.router.hashHasChanged(container);
+const routes = [
+    {name: 'loader', screen: ['loader']},
+    {name: 'home', screen: ['header', 'home']},
+    {name: 'search', screen: ['header','sidebar','search']},
+    {name: 'overview', screen: ["header", "subheading", "overview"]},
+    {name: 'print', screen: ["header", "subheading", "print"]},
+    {name: 'details', screen: ["header", "sidebar", "details"]},
+];
+
+const router = function() {
+    const hash = window.location.hash.slice(1);
+    console.log(hash);
+    console.log("route: " + routes.filter(route => route.name === hash).map(route => route.screen));
+
+    // Set non-needed views to not show:
+    routes
+        .filter(route => route.name !== hash)
+        .map(route => route.screen)
+        .flat()
+        .map(route => {
+            if(container(route).style.display === 'block')
+                container(route).style.display = 'none'
+        });
+
+    // Set needed views to show:
+    routes
+        .filter(route => route.name === hash)
+        .map(route => route.screen)
+        .flat()
+        .map(screen => container(screen).style.display = 'block');
 };
-*/
 
 window.onload = function () {
-
-/*    window.location.hash = '';
-
-    window.addEventListener("hashchange", hashHasChanged, false);*/
 
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
   model.setNumberOfGuests(2);
 
-  show("loader");
+  window.addEventListener("hashchange", router);
+  window.addEventListener("load", router);
 
-  Promise.all([model.getDish(453), model.getDish(559251)])
-      .then(function(values) {
+  window.location.hash = 'loader';
 
-        for(const element of values)
-          model.addDishToMenu(element);
-        new HomeView(container("home"), model).render();
-        new SubheadingView(container("subheading"), model).render();
-        new OverviewView(container("overview"), model).render();
-        new SearchView(container("search"), model).render();
-        new PrintOutView(container("print"), model).render();
-        new SidebarView(container("sidebar"), model).render();
-        new DetailsView(container("details"), model).render();
+    Promise.all([model.getDish(453), model.getDish(559251)])
+        .then(function(values) {
 
-        show("search");
-      })
-      .catch(console.error);
+            for(const element of values) {
+                model.addDishToMenu(element);
+            }
+            new HomeView(container("home"), model).render();
+            new SubheadingView(container("subheading"), model).render();
+            new OverviewView(container("overview"), model).render();
+            new SearchView(container("search"), model).render();
+            new PrintOutView(container("print"), model).render();
+            new SidebarView(container("sidebar"), model).render();
+            new DetailsView(container("details"), model).render();
+
+            window.location.hash = 'home';
+        })
+        .catch(console.error);
 
 };

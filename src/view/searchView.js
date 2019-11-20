@@ -36,8 +36,8 @@ class SearchView {
         this.afterRender();
     }
 
-    afterRender() {
-        let dishes = this.model.getFullMenu();
+    async afterRender() {
+        let dishes = await this.model.getAllDishes();
         let title = "FIND A DISH";
         if(this.model.getFullMenu()) {
             title = "ADD ANOTHER ONE";
@@ -47,7 +47,7 @@ class SearchView {
         dishes.map(dish =>  {
             this.container.querySelector("#dishes-items").append(
                 makeWithAttr("div", "", "dish", [
-                    makeImage("","dish-image", dish.image),
+                    makeImage("","dish-image", "https://spoonacular.com/recipeImages/" + dish.image),
                     makeWithAttr("p","","dish-text", dish.title),
 
                     // Lösningar på testerna:
