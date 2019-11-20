@@ -3,7 +3,6 @@
     width: 100%;
     grid-template-rows: 50px calc(100vh - 50px);
     grid-template-columns: 20% 80%;
-    background-color: mediumspringgreen;
     border-left: 2px solid black;
 }
 
