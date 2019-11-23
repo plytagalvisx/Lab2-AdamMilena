@@ -9,7 +9,8 @@ class SidebarView {
           makeWithAttr("div", "" , "grid-sidebar", [
 
               makeWithAttr("div", "sidebar-top", "", [
-                  makeWithAttr("div","","","My Dinner"),
+                  //makeWithAttr("div","","","My Dinner"),
+                  //makeWithAttr("div","","","SEK 77.45"),
                   makeWithAttr("a", "collapse-sidebar-btn", "hamburger",""),
 
               ]),
@@ -27,7 +28,7 @@ class SidebarView {
                   makeWithAttr("div", "sidebar-cost" ,"", ""),
 
                   makeWithAttr("div", "sidebar-confirm", "",
-                      makeButton("sidebarBtn", "startBtn", "#home", "Confirm Dinner")),
+                      makeButton("sidebarBtn", "startBtn", "#overview", "Confirm Dinner")),
 
               ]),
 
@@ -51,6 +52,26 @@ class SidebarView {
       button.addEventListener('click', listener, false);
 
       /*
+      Testing:
+      Removes the added dish from menu (on the sidebar) when the trash tag button is pressed.
+      */
+      /*let removeButton = this.container.querySelector("???");
+      let listener2 = function() {
+          // if an added dish exists/is not null then
+          // remove it:
+          this.model.removeDishFromMenu(evtData.id);
+      }
+      removeButton.addEventListener('click', listener2, false);*/
+
+      /*
+      Displays the total price when the sidebar is collapsed
+       */
+      this.container.querySelector("#sidebar-top").prepend(
+          make("div", "My Dinner"),
+          makeWithAttr("div", "", "SEK-text", "SEK " + this.model.getTotalMenuPrice())
+      );
+
+      /*
       Fetch data from model.
        */
       let dishes = this.model.getFullMenu();
@@ -59,15 +80,20 @@ class SidebarView {
               makeWithAttr("div", "", "flex-between-dishes", [
                   make("div", dish.title),
                   make("div", dish.pricePerServing * this.model.getNumberOfGuests()),
+                  makeInnerHTML("p", "&#x1f5d1;")
               ])
           );
       });
 
       this.container.querySelector("#sidebar-cost").append(
-          make("div", "SEK " + this.model.getTotalMenuPrice())
+          make("div", "SEK " + this.model.getTotalMenuPrice()),
       );
 
       // Varför fungerar inte detta? Ska inte placeholder vara det som visas från början?
       //this.container.querySelector("#sidebar-num-people").setAttribute("placeholder", this.model.getNumberOfGuests());
   }
+
+    update(payload) {
+        // TODO Lab3
+    }
 }

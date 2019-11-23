@@ -27,4 +27,8 @@ class PrintOutView {
             );
         });
     }
+
+    update(payload) {
+        // TODO Lab3
+    }
 }

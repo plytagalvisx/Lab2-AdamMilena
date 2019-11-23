@@ -8,7 +8,7 @@ class OverviewView {
         this.container.append(
             makeWithAttr("div", "overviewmain", "main", [
                 makeWithAttr("div","dishes-container","", [
-                    makeWithAttr("ul", "dishes-items", "", [
+                    makeWithAttr("ul", "overview-dishes-items", "", [
                         makeWithAttr("div", "vertline", "", ""),
                         makeWithAttr("div","price-container","", [
                             make("div",  "Total: "),
@@ -17,7 +17,7 @@ class OverviewView {
                 ]),
                 makeWithAttr("div", "", "horiline", ""),
 
-                makeWithAttr("div", "toPrintBtn", "", "Print full recipe")
+                makeButton("toPrintBtn", "", "#print", "Print full recipe")
             ])
         );
         this.afterRender();
@@ -26,7 +26,7 @@ class OverviewView {
     afterRender() {
         let dishes = this.model.getFullMenu();
         dishes.map(dish =>  {
-            this.container.querySelector("#dishes-items").prepend(
+            this.container.querySelector("#overview-dishes-items").prepend(
                 makeWithAttr("li", "", "dish", [
                     makeImage("","dish-image", dish.image),
                     makeWithAttr("p","","dish-text", dish.title)
@@ -37,5 +37,9 @@ class OverviewView {
             make("div", Math.round(this.model.getTotalMenuPrice()) + " SEK")
         );
 
+    }
+
+    update(payload) {
+        // TODO Lab3
     }
 }

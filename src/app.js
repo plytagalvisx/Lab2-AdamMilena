@@ -18,11 +18,19 @@ const makeWithAttr = (type, id, className, children) => {
   return ret;
 };
 
+/* Create id/class in order to define an event reference on the trash tag
+* so when the tag is clicked, it will remove the added dish from the menu */
+const makeInnerHTML = (type, arg) => {
+    let ret = document.createElement(type);
+    ret.innerHTML = arg;
+    return ret;
+};
+
 const makeImage = (id, className, path) => {
   let ret = document.createElement("div");
   ret.id = id;
   ret.setAttribute("class", className);
-  ret.setAttribute("style", "background: url('" + path + "'); background-size: cover; background-position: center;");
+  ret.setAttribute("style", "background: url('" + path + "');background-size: cover;background-position: center;");
   return ret;
 };
 
@@ -42,7 +50,10 @@ const makeButton = (id, className, href, children) => {
     ret.id = id;
     ret.href = href;
     ret.setAttribute("class", className);
-    ret.append(children);
+    if(children instanceof Array)
+        ret.append(... children);
+    else
+        ret.append(children);
     return ret;
 };
 
@@ -51,62 +62,142 @@ const container=function(containerName){
   return document.body.querySelector("#container-"+containerName);
 };
 
-// the View containers will not all be visible at the same time.
-// Various screens will show different Views
-const screens = {
-    loader: ["loader"],
-    home: ["header", "home"],
-    search: ["header", "sidebar", "search"],
-    overview: ["header", "subheading", "overview"],
-    print: ["header", "subheading", "print"],
-    details: ["header", "sidebar", "details"],
-};
-
-// switching between screens
-const show = function(screenName) {
-  // hide all views first
-  // optional FIXME: we could avoid hiding the containers that are part of the screen to be shown
-  // optional FIXME: finding the containers could be done automatically
-  // by looking at document.body.firstChild.children
-  ["header", "home", "overview", "search", "sidebar", "print", "subheading", "details", "loader"]
-      .forEach(containerName => container(containerName).style.display="none");
-
-  // now we show all the Views used by the indicated screen
-  screens[screenName]
-      .forEach(containerName => container(containerName).style.display = "block");
-};
-
-const routes = [
-    {name: 'loader', screen: ['loader']},
-    {name: 'home', screen: ['header', 'home']},
-    {name: 'search', screen: ['header','sidebar','search']},
-    {name: 'overview', screen: ["header", "subheading", "overview"]},
-    {name: 'print', screen: ["header", "subheading", "print"]},
-    {name: 'details', screen: ["header", "sidebar", "details"]},
-];
-
-const router = function() {
-    const hash = window.location.hash.slice(1);
-    console.log(hash);
-    console.log("route: " + routes.filter(route => route.name === hash).map(route => route.screen));
-
-    // Set non-needed views to not show:
-    routes
-        .filter(route => route.name !== hash)
-        .map(route => route.screen)
-        .flat()
-        .map(route => {
-            if(container(route).style.display === 'block')
-                container(route).style.display = 'none'
+/*const GSC = function (initState, condition, id) {
+    Router.transits
+        .map(transit => {
+            if(transit.condition.includes('id', 1)) {
+                let transit_condition = transit.condition.split(':')[0] + ":" + id;
+                console.log("transit.condition.includes('id', 1): ", transit.condition.includes('id', 1));
+                console.log("transit_condition: ", transit_condition);
+                if(transit.initState === initState && transit_condition === condition)
+                    //window.location.hash = transit.nextState;
+                    window.location.hash = transit.nextState.split(':')[0] + ":" + id;
+            }
+            else {
+                if(transit.initState === initState && transit.condition === condition)
+                    window.location.hash = transit.nextState;
+            }
         });
 
-    // Set needed views to show:
-    routes
-        .filter(route => route.name === hash)
-        .map(route => route.screen)
-        .flat()
-        .map(screen => container(screen).style.display = 'block');
+};*/
+
+const GSC = function (initState, condition) {
+    Router.transits
+        .map(transit => {
+            if(transit.initState === initState && transit.condition === condition)
+                window.location.hash = transit.nextState;
+        });
 };
+
+/*
+Router is a singleton function and can only be created through calling Router.getRouter().
+When the router is created, the initial routes are also created.
+New routes can be added via Router.addRoute(name, screensarray).
+Routes can be deleted via Router.deleteRoute(routeNameToDelete).
+ */
+const Router = (function() {
+    let router;
+
+    let routes = [
+        {name: 'loader', screen: ['loader']},
+        {name: 'home', screen: ['header', 'home']},
+        {name: 'search', screen: ['header','sidebar','search']},
+        {name: 'search:searchString', screen: ['header', 'sidebar', 'search']},
+        {name: 'details:id', screen: ['header', 'sidebar', 'details']},
+        {name: 'overview', screen: ["header", "subheading", "overview"]},
+        {name: 'print', screen: ["header", "subheading", "print"]},
+        {name: 'details', screen: ["header", "sidebar", "details"]},
+        {name: '404', screen: ["header", "404"]}
+    ];
+
+    const transits = [
+        {initState: 'home', condition: 'startbtn', nextState: 'search'},
+        {initState: 'overview', condition: 'toPrintBtn', nextState: 'print'},
+        {initState: 'overview', condition: 'goBackBtn', nextState: 'search'},
+        {initState: 'print', condition: 'goBackBtn', nextState: 'search'},
+        {initState: 'search', condition: 'confirmBtn', nextState: 'overview'},
+        {initState: 'search', condition: 'search?searchString', nextState: 'search?searchString'},
+        {initState: 'search', condition: 'search:dishid', nextState: 'details:id'},
+        {initState: 'details', condition: 'goBackBtn', nextState: 'search:lastsearch'},
+        {initState: 'details', condition: 'addToMenuBtn', nextState: 'search'},
+    ];
+
+    function createRouter() {
+        window.addEventListener("hashchange", route);
+        window.addEventListener("load", route);
+        return {};
+    }
+
+    function route() {
+        let hashWhole = window.location.hash.slice(1);
+        let hash = window.location.hash.slice(1).split(':')[0];
+        let hash2 = window.location.hash.slice(1).split(':')[1];
+
+        // Console logging for debugging purposes.
+        console.log("hash: ", hash);
+        console.log("hashId/hashString: ", hash2);
+        console.log("route: " + routes.filter(route => route.name === hash).map(route => route.screen));
+
+        // If a non-valid hash is entered, show the 404 page.
+        if(!routes.map(route => route.name).includes(hash))
+            hash = '404';
+
+        // Set non-needed views to not show:
+        routes
+            .filter(route => route.name !== hash)
+            .map(route => route.screen)
+            .flat()
+            .map(route => {
+                if(container(route).style.display === 'block')
+                    container(route).style.display = 'none'
+            });
+
+        // Set needed views to show:
+        routes
+            .filter(route => route.name === hash)
+            .map(route => route.screen)
+            .flat()
+            .map(screen => container(screen).style.display = 'block');
+
+        /*routes.filter(route => {
+            if(route.name.includes('id', 1)) {
+                let id = 547775;
+                console.log("route.name: ", route.name.split(':')[0] + ":" + id);
+            }
+        })*/
+
+    }
+
+    return {
+        getRouter: function () {
+            if (!router) {
+                router = createRouter();
+            }
+            return router;
+        },
+        addRoute: function(name, screens) {
+            if(screens instanceof Array)
+                routes.push(newRoute = {name: name, screens: screens});
+            else
+                return "Screens must be an array.";
+
+            console.log(routes);
+        },
+        deleteRoute: function(routeToDelete) {
+            if(routes.map(route => route.name).includes(routeToDelete)) {
+                routes = routes.filter(route => route.name !== routeToDelete);
+                console.log(routes);
+            }
+            else
+                return "The given route is not specified";
+        },
+        transits,
+    };
+})();
+
+/*const gsc = function(model) {
+    this.model = model;
+}*/
 
 window.onload = function () {
 
@@ -115,26 +206,45 @@ window.onload = function () {
   const model = new DinnerModel();
   model.setNumberOfGuests(2);
 
-  window.addEventListener("hashchange", router);
-  window.addEventListener("load", router);
+    Router.getRouter();
 
-  window.location.hash = 'loader';
+    Router.addRoute("test", ["test", "test"]);
+    Router.deleteRoute("test");
 
-    Promise.all([model.getDish(453), model.getDish(559251)])
+
+    let hash = window.location.hash;
+
+    window.location.hash = 'loader';
+
+    Promise.all([model.getDish(364), model.getDish(44)])
         .then(function(values) {
 
             for(const element of values) {
                 model.addDishToMenu(element);
             }
-            new HomeView(container("home"), model).render();
-            new SubheadingView(container("subheading"), model).render();
-            new OverviewView(container("overview"), model).render();
-            new SearchView(container("search"), model).render();
-            new PrintOutView(container("print"), model).render();
-            new SidebarView(container("sidebar"), model).render();
-            new DetailsView(container("details"), model).render();
 
-            window.location.hash = 'search';
+            //const generalStateController = gsc(model);
+
+            const homeView = new HomeView(container("home"), model);
+            const subheadingView = new SubheadingView(container("subheading"), model);
+            const overviewView = new OverviewView(container("overview"), model);
+            const searchView = new SearchView(container("search"), model);
+            const printoutView = new PrintOutView(container("print"), model);
+            const sidebarView = new SidebarView(container("sidebar"), model);
+            const detailsView = new DetailsView(container("details"), model);
+
+            new HomeController(homeView, model).renderView();
+            new SubheadingController(subheadingView, model).renderView();
+            new OverviewController(overviewView, model).renderView();
+            new SearchController(searchView, model).renderView();
+            new PrintoutController(printoutView, model).renderView();
+            new SidebarController(sidebarView, model).renderView();
+            new DetailsController(detailsView, model).renderView();
+
+            if(!hash)
+                window.location.hash = 'home';
+            else
+                window.location.hash = hash;
         })
         .catch(console.error);
 

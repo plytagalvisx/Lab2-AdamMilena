@@ -20,6 +20,7 @@
 .print-image {
     grid-column: 1 / 1;
     max-width: 90%;
+    height: 300px;
     border: 2px solid black;
 }
 
@@ -36,6 +37,10 @@
 
 @media (max-width: 450px) {
 
+    .print-image {
+        height: 150px;
+        margin-left: 2%;
+    }
 
     .print-cluster {
         grid-column: 1 / span 5;

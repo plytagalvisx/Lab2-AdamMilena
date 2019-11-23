@@ -2,14 +2,28 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Comic Sans MS, serif;
+    font-family: "Comic Sans MS", serif;
     box-sizing: border-box;
 }
 
-img {
-    border: 5px solid black;
-    object-fit: contain;
+.dish-image {
+    border: 3px solid black;
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    max-width: 100%;
+    width: 200px;
 }
+
+.dish-text {
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+}
+
 
 .container-page-content {
     display: grid;
@@ -25,6 +39,19 @@ img {
 @media (max-width: 450px) {
     #container-sidebar {
         z-index: 2;
+    }
+}
+
+#container-404 {
+    grid-column: 1 / span 2;
+    grid-row: 6;
+    font-size: xx-large;
+    text-align: center;
+}
+
+@media (max-width: 450px) {
+    #container-404 {
+        font-size: x-large;
     }
 }
 
@@ -98,11 +125,8 @@ img {
 Source for loader: https://www.w3schools.com/howto/howto_css_loader.asp
  */
 .spinner {
-    position: absolute;
-    left: 44%;
-    top: 38%;
     z-index: 1;
-    border: 16px solid #f3f3f3; /* Light grey */
+    border: 16px solid orange; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
     width: 120px;
@@ -115,3 +139,12 @@ Source for loader: https://www.w3schools.com/howto/howto_css_loader.asp
     100% { transform: rotate(360deg); }
 }
 
+#container-loader {
+    grid-column: 1 / span 2;
+    grid-row: 6;
+}
+
+#loader-outer {
+    display: flex;
+    justify-content: center;
+}

@@ -7,18 +7,25 @@
 }
 
 #search-dish-button {
-    border-right: solid;
-    border-bottom: solid;
     cursor: pointer;
-    color: #212529;
     background-color: orange;
-    border-color: #212529;
     margin-left: 10px;
+    border: 1px solid black;
+    box-shadow: 2px 2px black;
 }
 
 #greyBorder {
     border: 1px solid lightgrey;
 }
+
+#inputDishTitle {
+    border: 1px solid lightgrey;
+}
+
+#selectTypeDish {
+    border: 1px solid lightgrey;
+}
+
 #displayNone {
     display: none;
 }
@@ -59,8 +66,8 @@
     .flex-between-search1 {
         grid-column: 1 / span 4;
         display: flex;
-        justify-content: left;
-        padding-left: 0px;
+        justify-content: center;
+        padding-left: 0;
     }
 
     .flex-between-search2 {
@@ -70,7 +77,7 @@
         justify-content: center;
         margin-top: 10%;
         border: 2px solid transparent;
-        flex-wrap: wrap;
+        border-top: 2px solid black;
     }
 }
 

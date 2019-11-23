@@ -19,9 +19,14 @@
 <body>
 <div class="container-page-content">
     <div id="container-header" style="display:none">
-        Dinner Planner
+        <a href="#home">
+            Dinner Planner
+        </a>
     </div>
-    <div id="container-loader" class="spinner" role="status" style="display:none">
+    <div id="container-loader" role="status" style="display:none">
+        <div id="loader-outer">
+            <div class="spinner"></div>
+        </div>
 
     </div>
     <div id="container-subheading" style="display:none">
@@ -38,6 +43,7 @@
     </div>
     <div id="container-print" style="display:none">
     </div>
+    <div id="container-404" style="display:none">404<br>Page not found</div>
 </div>
 
 
@@ -56,6 +62,13 @@
 <script src="src/view/SubheadingView.js"></script>
 <script src="src/view/DetailsView.js"></script>
 <script src="src/view/sidebarView.js"></script>
+<script src="src/controller/sidebarController.js"></script>
+<script src="src/controller/searchController.js"></script>
+<script src="src/controller/homeController.js"></script>
+<script src="src/controller/subheadingController.js"></script>
+<script src="src/controller/overviewController.js"></script>
+<script src="src/controller/detailsController.js"></script>
+<script src="src/controller/printoutController.js"></script>
 <script src="src/app.js"></script>
 
 </body>

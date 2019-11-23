@@ -12,7 +12,7 @@ class SubheadingView {
                     makeWithAttr("p","numGuests", "",""),
                     makeWithAttr("p", "people", "", "")
                 ]),
-                makeWithAttr("a", "backBtn", "backBtn", "Go back and edit dinner")
+                makeButton("backBtn", "backBtn", "#search", "Go back and edit dinner")
             ])
         );
         this.afterRender();
@@ -25,5 +25,9 @@ class SubheadingView {
         else
             this.container.querySelector("#people").innerHTML = "people";
 
+    }
+
+    update(payload) {
+        // TODO Lab3
     }
 }

@@ -24,17 +24,21 @@ class DetailsView {
             ])
 
         );
-        this.afterRender();
+        //this.afterRender();
 
     }
 
     afterRender() {
-        let dishes = this.model.getFullMenu();
-        let dish = dishes[0];
+    }
+
+    update(dish) {
+       // this.afterRender(dish);
+        // TODO Lab3
+
         let guests = this.model.getNumberOfGuests();
         this.container.querySelector("#details-left-container").append(
             makeWithAttr("div", "", "details-heading", dish.title),
-            makeImage("","details-image",dish.image),
+            makeImage("","details-image", dish.image),
             makeWithAttr("div", "details-image-text", "", dish.winePairing.pairingText),
         );
         this.container.querySelector("#details-preparation").append(
@@ -45,17 +49,16 @@ class DetailsView {
         this.container.querySelector("#details-ingredient-header").textContent = ("Ingredients for " + this.model.getNumberOfGuests() + " people");
 
         dish.extendedIngredients.map(ingredient => {
-           this.container.querySelector("#details-ingredient-list").append(
-               makeWithAttr("div", "", "details-ingredient-dish", [
-                   makeWithAttr("div", "" ,"amount", ingredient.amount*guests + " " + ingredient.measures.metric.unitShort),
-                   makeWithAttr("div","","ingredient", ingredient.name)
-               ]),
-           )
+            this.container.querySelector("#details-ingredient-list").append(
+                makeWithAttr("div", "", "details-ingredient-dish", [
+                    makeWithAttr("div", "" ,"amount", ingredient.amount*guests + " " + ingredient.measures.metric.unitShort),
+                    makeWithAttr("div","","ingredient", ingredient.name)
+                ]),
+            )
         });
 
         this.container.querySelector("#details-ingredient-footer").append(
             make("div", "SEK " + dish.pricePerServing * guests)
         );
-
     }
 }
