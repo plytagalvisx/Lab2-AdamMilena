@@ -8,17 +8,17 @@ class DetailsController {
         // TODO lab 3
     }
 
-     renderView() {
+    renderView() {
         // TODO lab 3
 
-        //await this.something();
-        /*console.log("Find a dish Event:");
+       /* await this.something();
+        console.log("Find a dish Event detailsController:");
         let sendOverToDetailsView = this.sendOverToDetailsView.bind(this);
-        let listener = function() {
+        let listener2 = function() {
             sendOverToDetailsView();
         };
         let clickedImage = this.view.container.querySelector("#dishes-items");
-        clickedImage.addEventListener('click', listener);*/
+        clickedImage.addEventListener('click', listener2);*/
 
 
          this.view.render();
@@ -29,17 +29,23 @@ class DetailsController {
          backToSearchBtn.addEventListener('click', listener);
 
 
-         const hash = window.location.hash;
-         const idIndex = hash.indexOf("id");
-         const id = hash.substring(idIndex + 2, hash.length);
-         console.log("Trying to render a details view. ID: " + hash + " " + idIndex + " " + id);
+        // Problem: let hash blir lika med '#loader' som nuvarande hash,
+        // men istället så vill vi få let hash att vara lika med t.ex '#details:id:547775'
+        // beroende på vilken dish image vi klickar på i search vyn.
+        let hash = window.location.hash;
+        console.log("Checking hash: ", hash);
 
-         //let fakeId = 547775;
-         /*this.model.getDish(id).then(dish => {
-             //console.log("HELLO: ", dish);
-             this.view.update(dish);
-             //this.addListeners(dish);
-         });*/
+        const indexOfID = hash.indexOf("id");
+        const id = hash.substring(indexOfID + 3, hash.length);
+        console.log("hash: " + hash);
+        console.log("indexOfID: " + indexOfID);
+        console.log("id: " + id);
+
+        //let fakeId = 547775;
+        this.model.getDish(id).then(dish => {
+            //console.log("Dish: ", dish);
+            this.view.update(dish);
+        });
     }
 
     // TODO Lab 3
@@ -51,11 +57,9 @@ class DetailsController {
             //let clearTextContent = document.querySelector('#dishes-items');
             //clearTextContent.textContent = '';
 
-            let dish = this.model.getDish(818941);
+            let dish = this.model.getDish(547775);
             dish.then(result => {
-                return result.json();
-            }).then(console.log).catch(console.error).finally(() => {
-                dish.then(result => this.view.update(result));
+                this.view.update(result);
                 resolve();
             });
         });*/

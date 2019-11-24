@@ -25,36 +25,34 @@ class SearchController {
 
 
         /* The user can click on the dish item in the search view */
-        let listener2 = function(dishItem) {
+        /*let listener2 = function(dishItem) {
             let dishItemClassName = dishItem.target.parentElement.className;
             if (dishItemClassName === 'clickableImage')
             {
                 let dishItemId = dishItem.target.parentElement.id;
                 console.log("dishItemId: ", dishItemId);
                 let conditionWithId = ':' + dishItemId;
-                GSC('search', 'search:dishid')
+                this.model.getDish(id).then(dish => {
+                    GSC('search', 'smallDishBtn');
+                });
+                GSC('search', 'search:dishid', dishItemId)
             }
         };
         let clickedImage = this.view.container.querySelector('#dishes-items');
-        clickedImage.addEventListener('click', listener2);
+        clickedImage.addEventListener('click', listener2);*/
 
 
 
-        /*let clickedImage = this.view.container.querySelector('#dishes-items');
+        let clickedImage = this.view.container.querySelector('#dishes-items');
         clickedImage.addEventListener('click', dishItem => {
             let dishItemClassName = dishItem.target.parentElement.className;
             if (dishItemClassName === 'clickableImage')
             {
                 let dishItemId = dishItem.target.parentElement.id;
-                window.location.hash = "#details:" + dishItemId;
-                let hash = window.location.hash;
-                console.log("dishId: ", dishItemId);
-                console.log("dishItem hash: ", hash);    // This code contains this: #details:547775
-                this.model.getDish(dishItemId).then(dish => {
-                    console.log("Hello Dish!: ", dish);
-                });
+                console.log("dishItemId: ", dishItemId);
+                GSC('search', 'search:dishid', dishItemId)
             }
-        });*/
+        });
 
     }
 
@@ -68,16 +66,16 @@ class SearchController {
             let clearTextContent = document.querySelector('#dishes-items');
             clearTextContent.textContent = '';
             let dishes = this.model.getAllDishes(type, query).then(result => result.map(dish => {
-                        return {
-                            id: dish.id,
-                            image: dish.image,
-                            title: dish.title
-                        };
-                    })
-                ).catch(console.error).finally(() => {
-                    dishes.then(result => this.view.update(result));
-                    resolve();
-                });
+                    return {
+                        id: dish.id,
+                        image: dish.image,
+                        title: dish.title
+                    };
+                })
+            ).catch(console.error).finally(() => {
+                dishes.then(result => this.view.update(result));
+                resolve();
+            });
         });
     }
 

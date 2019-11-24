@@ -62,32 +62,51 @@ const container=function(containerName){
   return document.body.querySelector("#container-"+containerName);
 };
 
-/*const GSC = function (initState, condition, id) {
+const GSC = function (initState, condition, id) {
     Router.transits
         .map(transit => {
-            if(transit.condition.includes('id', 1)) {
-                let transit_condition = transit.condition.split(':')[0] + ":" + id;
-                console.log("transit.condition.includes('id', 1): ", transit.condition.includes('id', 1));
-                console.log("transit_condition: ", transit_condition);
-                if(transit.initState === initState && transit_condition === condition)
-                    //window.location.hash = transit.nextState;
-                    window.location.hash = transit.nextState.split(':')[0] + ":" + id;
+            if(transit.initState === initState && transit.condition === condition) {
+                if (!id) {
+                    window.location.hash = transit.nextState;
+                    console.log("hash with no id!");
+                }
+                else {
+                    window.location.hash = transit.nextState + ":" + id;
+                    console.log("hash with id!");
+                }
+            }
+        });
+};
+
+// ALTERNATIV 1:
+/*const GSC = function (initState, condition, id) {
+    Router.transits
+        .map(state => {
+            if(condition.includes('dishid')) {
+                //console.log("condition includes dishid: ", condition.includes('dishid'));
+                let splitCondition = condition.split(':')[0] + ":" + id;
+                if(state.initState === initState && state.condition === splitCondition)
+                    //console.log("DO I APPEAR HERE??");
+                    window.location.hash = state.nextState.split(':')[0] + ":" + id;
             }
             else {
-                if(transit.initState === initState && transit.condition === condition)
-                    window.location.hash = transit.nextState;
+                //console.log("condition doesn't include dishid: ", condition.includes('dishid'));
+                if(state.initState === initState && state.condition === condition)
+                    window.location.hash = state.nextState;
             }
         });
 
 };*/
 
-const GSC = function (initState, condition) {
+// ALTERNATIV 2:
+/*const GSC = function (initState, condition) {
     Router.transits
         .map(transit => {
             if(transit.initState === initState && transit.condition === condition)
                 window.location.hash = transit.nextState;
+                //window.location.hash = transit.nextState.split(':')[0] + ":" + id;
         });
-};
+};*/
 
 /*
 Router is a singleton function and can only be created through calling Router.getRouter().
@@ -129,7 +148,7 @@ const Router = (function() {
     }
 
     function route() {
-        let hashWhole = window.location.hash.slice(1);
+        // let hashWhole = window.location.hash.slice(1);
         let hash = window.location.hash.slice(1).split(':')[0];
         let hash2 = window.location.hash.slice(1).split(':')[1];
 
@@ -137,6 +156,7 @@ const Router = (function() {
         console.log("hash: ", hash);
         console.log("hashId/hashString: ", hash2);
         console.log("route: " + routes.filter(route => route.name === hash).map(route => route.screen));
+
 
         // If a non-valid hash is entered, show the 404 page.
         if(!routes.map(route => route.name).includes(hash))
@@ -158,14 +178,6 @@ const Router = (function() {
             .map(route => route.screen)
             .flat()
             .map(screen => container(screen).style.display = 'block');
-
-        /*routes.filter(route => {
-            if(route.name.includes('id', 1)) {
-                let id = 547775;
-                console.log("route.name: ", route.name.split(':')[0] + ":" + id);
-            }
-        })*/
-
     }
 
     return {
@@ -195,10 +207,6 @@ const Router = (function() {
     };
 })();
 
-/*const gsc = function(model) {
-    this.model = model;
-}*/
-
 window.onload = function () {
 
   console.log("start");
@@ -215,6 +223,7 @@ window.onload = function () {
     let hash = window.location.hash;
 
     window.location.hash = 'loader';
+    //window.location.hash = 'details:id:547775';
 
     Promise.all([model.getDish(364), model.getDish(44)])
         .then(function(values) {
@@ -222,8 +231,6 @@ window.onload = function () {
             for(const element of values) {
                 model.addDishToMenu(element);
             }
-
-            //const generalStateController = gsc(model);
 
             const homeView = new HomeView(container("home"), model);
             const subheadingView = new SubheadingView(container("subheading"), model);
