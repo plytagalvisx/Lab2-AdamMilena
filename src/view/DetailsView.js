@@ -13,7 +13,9 @@ class DetailsView {
                     makeWithAttr("div", "details-ingredient-list", "", ""),
                     makeWithAttr("div", "", "details-line", ""),
                     makeWithAttr("div", "details-ingredient-footer", "",
-                        makeWithAttr("a", "addToMenuBtn", "startBtn", "Add to menu")),
+                        //makeWithAttr("a", "addToMenuBtn", "startBtn", "Add to menu")
+                    ),
+                    makeWithAttr("a", "addToMenuBtn", "startBtn", "Add to menu")
                 ]),
                 makeWithAttr("div", "details-left-container", "" , ""),
                 makeWithAttr("a", "backToSearchBtn", "backBtn", "Back to search"),
@@ -32,24 +34,9 @@ class DetailsView {
     /*afterRender() {
     }*/
 
-    async update(id) {
-       // this.afterRender(dish);
+    async update(dish) {
         // TODO Lab3
 
-        /*let hash = window.location.hash;
-        console.log("hash via detailsView: ", hash);
-        const indexOfID = hash.indexOf("id");
-        const id = hash.substring(indexOfID + 3, hash.length);
-        console.log("hash: " + hash);
-        console.log("indexOfID: " + indexOfID);
-        console.log("id: " + id);*/
-
-        let hash = window.location.hash;
-        console.log("Checking hash cia view: ", hash);
-        console.log("Checking id cia detailsView: ", id);
-
-        await this.model.getDish(id).then(dish => {
-            //this.update(); // Den körs utan stopp, hur kan vi göra att den ska köras endast en gång och sen sluta köra om igen.
             let guests = this.model.getNumberOfGuests();
             this.container.querySelector("#details-left-container").append(
                 makeWithAttr("div", "", "details-heading", dish.title),
@@ -75,6 +62,5 @@ class DetailsView {
             this.container.querySelector("#details-ingredient-footer").append(
                 make("div", "SEK " + dish.pricePerServing * guests)
             );
-        });
     }
 }

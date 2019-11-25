@@ -1,8 +1,8 @@
 class SearchController {
-    constructor(view, model, detailsView) {
+    constructor(view, model, detailsController) {
         this.view = view;
         this.model = model;
-        this.detailsView = detailsView;
+        this.detailsController = detailsController;
 
         // TODO lab 3
         this.receiveDishesFromAPI = this.searchAllDishes.bind(this);
@@ -42,8 +42,6 @@ class SearchController {
         let clickedImage = this.view.container.querySelector('#dishes-items');
         clickedImage.addEventListener('click', listener2);*/
 
-        //this.detailsController.sendOverToDetailsView(547775);
-
         let clickedImage = this.view.container.querySelector('#dishes-items');
         clickedImage.addEventListener('click', dishItem => {
             let dishItemClassName = dishItem.target.parentElement.className;
@@ -51,12 +49,9 @@ class SearchController {
             {
                 let dishItemId = dishItem.target.parentElement.id;
                 console.log("dishItemId: ", dishItemId);
-                this.detailsView.update(dishItemId);
-                /*this.model.getDish(dishItemId).then(dish => {
-                    GSC('search', 'search:dishid', dishItemId)
-                });*/
-
-                GSC('search', 'search:dishid', dishItemId)
+                window.location.hash = "loader";
+                this.detailsController.sendOverToDetailsView(dishItemId);
+                GSC('search', 'search:dishid');
             }
         });
 

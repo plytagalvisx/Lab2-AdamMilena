@@ -95,7 +95,8 @@
 }
 
 #addToMenuBtn {
-    width: auto;
+    /*width: auto;*/
+    width: 100px;
 }
 
 #details-left-container {

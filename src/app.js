@@ -136,7 +136,8 @@ const Router = (function() {
         {initState: 'print', condition: 'goBackBtn', nextState: 'search'},
         {initState: 'search', condition: 'confirmBtn', nextState: 'overview'},
         {initState: 'search', condition: 'search?searchString', nextState: 'search?searchString'},
-        {initState: 'search', condition: 'search:dishid', nextState: 'details:id'},
+        {initState: 'search', condition: 'search:dishid', nextState: 'loader'},
+        {initState: 'search', condition: 'viewDetails', nextState: 'details'},
         {initState: 'details', condition: 'goBackBtn', nextState: 'search:lastsearch'},
         {initState: 'details', condition: 'addToMenuBtn', nextState: 'search'},
     ];
@@ -246,9 +247,7 @@ window.onload = function () {
             new PrintoutController(printoutView, model).renderView();
             new SidebarController(sidebarView, model).renderView();
             new DetailsController(detailsView, model).renderView();
-            new SearchController(searchView, model, detailsView).renderView();
-
-            console.log("detailsView: ", detailsView);
+            new SearchController(searchView, model, new DetailsController(detailsView, model)).renderView();
 
             if(!hash)
                 window.location.hash = 'home';

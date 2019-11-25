@@ -43,22 +43,7 @@ class SearchView {
         }
         this.container.querySelector("#updateTitle").textContent = title;
 
-        let dishes = await this.model.getAllDishes();
-
-        /*dishes.map(dish =>  {
-            this.container.querySelector("#dishes-items").append(
-                makeWithAttr("div", "", "dish", [
-                  makeWithAttr("a", "", "",[
-                    makeImage("","dish-image", "https://spoonacular.com/recipeImages/" + dish.image),
-                    makeWithAttr("p","","dish-text", dish.title),
-
-                    // Lösningar på testerna:
-                    makeWithAttr("p","displayNone","value-main-course-name", "Breakfast Pizza"), // kan ej läsa av dish.title
-                    makeWithAttr("div", "displayNone", "value-num-guests", this.model.getNumberOfGuests()), // ligger i sidebarView
-                    makeWithAttr("div", "displayNone", "value-total-price", this.model.getTotalMenuPrice()) // ligger i sidebarView
-                  ])
-                ]),
-            )});*/
+        //let dishes = await this.model.getAllDishes();
     }
 
     update(dishes) {
