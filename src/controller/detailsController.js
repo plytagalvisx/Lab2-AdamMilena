@@ -29,15 +29,29 @@ class DetailsController {
          backToSearchBtn.addEventListener('click', listener);
 
 
+         //this.sendOverToDetailsView();
+    }
+
+    // TODO Lab 3
+
+    sendOverToDetailsView(id) {
+
         // Problem: let hash blir lika med '#loader' som nuvarande hash,
         // men istället så vill vi få let hash att vara lika med t.ex '#details:id:547775'
         // beroende på vilken dish image vi klickar på i search vyn.
-        let hash = window.location.hash;
+
+        // When we dispatch an event in one view, we need to be able to check
+        // that it triggers an update in a different view. For example,
+        // when we dispatch an event in searchView, then an update in detailsView
+        // must be triggered.
+
+        console.log("IT WORKS!! ", id);
+        /*let hash = window.location.hash;
         console.log("Checking hash: ", hash);
 
         const indexOfID = hash.indexOf("id");
         const id = hash.substring(indexOfID + 3, hash.length);
-        console.log("hash: " + hash);
+        console.log("hash via detailsController: " + hash);
         console.log("indexOfID: " + indexOfID);
         console.log("id: " + id);
 
@@ -45,25 +59,9 @@ class DetailsController {
         this.model.getDish(id).then(dish => {
             //console.log("Dish: ", dish);
             this.view.update(dish);
-        });
-    }
-
-    // TODO Lab 3
-
-    sendOverToDetailsView() {
-
-        //debugger;
-        /*return new Promise(resolve => {
-            //let clearTextContent = document.querySelector('#dishes-items');
-            //clearTextContent.textContent = '';
-
-            let dish = this.model.getDish(547775);
-            dish.then(result => {
-                this.view.update(result);
-                resolve();
-            });
+            //this.view.update();
         });*/
-        //debugger;
+
 
 
     }

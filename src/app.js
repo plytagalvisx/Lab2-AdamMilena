@@ -223,7 +223,7 @@ window.onload = function () {
     let hash = window.location.hash;
 
     window.location.hash = 'loader';
-    //window.location.hash = 'details:id:547775';
+    //window.location.hash = 'details:id:592479';
 
     Promise.all([model.getDish(364), model.getDish(44)])
         .then(function(values) {
@@ -243,10 +243,12 @@ window.onload = function () {
             new HomeController(homeView, model).renderView();
             new SubheadingController(subheadingView, model).renderView();
             new OverviewController(overviewView, model).renderView();
-            new SearchController(searchView, model).renderView();
             new PrintoutController(printoutView, model).renderView();
             new SidebarController(sidebarView, model).renderView();
             new DetailsController(detailsView, model).renderView();
+            new SearchController(searchView, model, detailsView).renderView();
+
+            console.log("detailsView: ", detailsView);
 
             if(!hash)
                 window.location.hash = 'home';
