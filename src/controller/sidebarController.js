@@ -45,16 +45,31 @@ class SidebarController {
                 dishes.map(dish => {
                     if(dish.id == dishItemId) {
                         //console.log("condition is?: ", (dish.id == dishItemId));
-                        let removedDish = this.model.removeDishFromMenu(dish.id);
+                        this.model.removeDishFromMenu(dish.id);
                     }
                 });
                 GSC('search', 'removeDishBtn');
             }
         });
 
+        const input = this.view.container.querySelector('#sidebar-num-people');
+        /*let updateValue = function(e) {
+            let currentNoOfGuests = e.target.value;
+            console.log("Number of guests: ", currentNoOfGuests);
+            this.model.setNumberOfGuests(2);
+            //let guests = this.model.getNumberOfGuests();
+            //console.log("Number of guests2: ", guests);
+        };*/
+        input.addEventListener('input', e => {
+            let currentNoOfGuests = e.target.value;
+            console.log("Number of guests: ", currentNoOfGuests);
+            this.model.setNumberOfGuests(currentNoOfGuests);
+            //let guests = this.model.getNumberOfGuests();
+            //console.log("Number of guests2: ", guests);
+            GSC('search', 'increaseInput');
+
+        });
 
 
     }
-
-    // TODO Lab 3
 }

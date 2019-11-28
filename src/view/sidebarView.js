@@ -53,12 +53,11 @@ class SidebarView {
         this.container.querySelector("#sidebar-dishes").textContent = '';
         this.container.querySelector("#sidebar-cost").textContent = '';
 
-        //this.model.setNumberOfGuests(e.target.value);
         dishes.map(dish =>  {
             this.container.querySelector("#sidebar-dishes").append(
                 makeWithAttr("div", "", "flex-between-dishes", [
                     make("div", dish.title),
-                    make("div", dish.pricePerServing * guests),
+                    make("div", Math.round(dish.pricePerServing * guests)),
                     makeWithAttr("a", "removeDishBtn", "removeDishBtn", [
                         makeInnerHTML("p", dish.id, "removeBtn", "&#x1f5d1;")
                     ])
@@ -67,7 +66,7 @@ class SidebarView {
         });
 
         this.container.querySelector("#sidebar-cost").append(
-            make("div", "SEK " + price),
+            make("div", "SEK " + Math.round(price)),
         );
     }
 }

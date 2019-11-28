@@ -113,6 +113,8 @@ const Router = (function() {
         {initState: 'details', condition: 'goBackBtn', nextState: 'search'},
         {initState: 'details', condition: 'addToMenuBtn', nextState: 'search'},
         {initState: 'search', condition: 'removeDishBtn', nextState: 'search'},
+        {initState: 'search', condition: 'increaseInput', nextState: 'search'},
+
     ];
 
     function createRouter() {
@@ -178,7 +180,9 @@ window.onload = function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
-  model.setNumberOfGuests(1);
+  //model.setNumberOfGuests(1);
+    //model.setNumberOfGuests(5);
+
 
     Router.getRouter();
     let hash = window.location.hash;

@@ -61,7 +61,7 @@ class DetailsView {
         });
 
         this.container.querySelector("#details-ingredient-footer").append(
-            make("div", "SEK " + dish.pricePerServing * guests)
+            make("div", "SEK " + Math.round(dish.pricePerServing * guests))
         );
     }
 }
