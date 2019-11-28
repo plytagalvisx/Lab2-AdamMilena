@@ -2,14 +2,12 @@ class OverviewController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
-
-        // TODO lab 3
     }
 
     renderView() {
         this.view.render();
-        // TODO lab 3
+        this.view.container.querySelector("#toPrintBtn").addEventListener('click', () => {
+            GSC('overview', 'toPrintBtn');
+        })
     }
-
-    // TODO Lab 3
 }

@@ -9,6 +9,13 @@ class SubheadingController {
     renderView() {
         this.view.render();
         // TODO lab 3
+
+        let goBackButton = this.view.container.querySelector("#backBtn");
+        let listener = function() {
+            GSC('overview', 'goBackBtn');
+        }
+        goBackButton.addEventListener('click', listener);
+
     }
 
     // TODO Lab 3

@@ -12,22 +12,21 @@ class SubheadingView {
                     makeWithAttr("p","numGuests", "",""),
                     makeWithAttr("p", "people", "", "")
                 ]),
-                makeButton("backBtn", "backBtn", "#search", "Go back and edit dinner")
+                makeWithAttr("a", "backBtn", "backBtn", "Go back and edit dinner")
             ])
         );
         this.afterRender();
     }
 
     afterRender() {
-        this.container.querySelector("#numGuests").innerHTML = this.model.getNumberOfGuests();
-        if(this.model.getNumberOfGuests() === 1)
+        this.model.addObserver(['numberOfGuests'], this.update.bind(this), this);
+    }
+
+    update(guest) {
+        this.container.querySelector("#numGuests").innerHTML = guest;
+        if(guest === 1)
             this.container.querySelector("#people").innerHTML = "person";
         else
             this.container.querySelector("#people").innerHTML = "people";
-
-    }
-
-    update(payload) {
-        // TODO Lab3
     }
 }

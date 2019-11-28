@@ -20,8 +20,10 @@ const makeWithAttr = (type, id, className, children) => {
 
 /* Create id/class in order to define an event reference on the trash tag
 * so when the tag is clicked, it will remove the added dish from the menu */
-const makeInnerHTML = (type, arg) => {
+const makeInnerHTML = (type, id, className, arg) => {
     let ret = document.createElement(type);
+    ret.setAttribute("class", className);
+    ret.id = id;
     ret.innerHTML = arg;
     return ret;
 };
@@ -68,45 +70,15 @@ const GSC = function (initState, condition, id) {
             if(transit.initState === initState && transit.condition === condition) {
                 if (!id) {
                     window.location.hash = transit.nextState;
-                    console.log("hash with no id!");
+                    //console.log("hash with no id!");
                 }
                 else {
                     window.location.hash = transit.nextState + ":" + id;
-                    console.log("hash with id!");
+                    //console.log("hash with id!");
                 }
             }
         });
 };
-
-// ALTERNATIV 1:
-/*const GSC = function (initState, condition, id) {
-    Router.transits
-        .map(state => {
-            if(condition.includes('dishid')) {
-                //console.log("condition includes dishid: ", condition.includes('dishid'));
-                let splitCondition = condition.split(':')[0] + ":" + id;
-                if(state.initState === initState && state.condition === splitCondition)
-                    //console.log("DO I APPEAR HERE??");
-                    window.location.hash = state.nextState.split(':')[0] + ":" + id;
-            }
-            else {
-                //console.log("condition doesn't include dishid: ", condition.includes('dishid'));
-                if(state.initState === initState && state.condition === condition)
-                    window.location.hash = state.nextState;
-            }
-        });
-
-};*/
-
-// ALTERNATIV 2:
-/*const GSC = function (initState, condition) {
-    Router.transits
-        .map(transit => {
-            if(transit.initState === initState && transit.condition === condition)
-                window.location.hash = transit.nextState;
-                //window.location.hash = transit.nextState.split(':')[0] + ":" + id;
-        });
-};*/
 
 /*
 Router is a singleton function and can only be created through calling Router.getRouter().
@@ -121,7 +93,7 @@ const Router = (function() {
         {name: 'loader', screen: ['loader']},
         {name: 'home', screen: ['header', 'home']},
         {name: 'search', screen: ['header','sidebar','search']},
-        {name: 'search:searchString', screen: ['header', 'sidebar', 'search']},
+        {name: 'search?searchString', screen: ['header', 'sidebar', 'search']},
         {name: 'details:id', screen: ['header', 'sidebar', 'details']},
         {name: 'overview', screen: ["header", "subheading", "overview"]},
         {name: 'print', screen: ["header", "subheading", "print"]},
@@ -130,16 +102,16 @@ const Router = (function() {
     ];
 
     const transits = [
-        {initState: 'home', condition: 'startbtn', nextState: 'search'},
+        {initState: 'home', condition: 'startBtn', nextState: 'search'},
         {initState: 'overview', condition: 'toPrintBtn', nextState: 'print'},
         {initState: 'overview', condition: 'goBackBtn', nextState: 'search'},
-        {initState: 'print', condition: 'goBackBtn', nextState: 'search'},
         {initState: 'search', condition: 'confirmBtn', nextState: 'overview'},
-        {initState: 'search', condition: 'search?searchString', nextState: 'search?searchString'},
+        {initState: 'search', condition: 'search?searchString', nextState: 'search'},
         {initState: 'search', condition: 'search:dishid', nextState: 'loader'},
         {initState: 'search', condition: 'viewDetails', nextState: 'details'},
-        {initState: 'details', condition: 'goBackBtn', nextState: 'search:lastsearch'},
+        {initState: 'details', condition: 'goBackBtn', nextState: 'search'},
         {initState: 'details', condition: 'addToMenuBtn', nextState: 'search'},
+        {initState: 'search', condition: 'removeDishBtn', nextState: 'search'},
     ];
 
     function createRouter() {
@@ -149,15 +121,7 @@ const Router = (function() {
     }
 
     function route() {
-        // let hashWhole = window.location.hash.slice(1);
-        let hash = window.location.hash.slice(1).split(':')[0];
-        let hash2 = window.location.hash.slice(1).split(':')[1];
-
-        // Console logging for debugging purposes.
-        console.log("hash: ", hash);
-        console.log("hashId/hashString: ", hash2);
-        console.log("route: " + routes.filter(route => route.name === hash).map(route => route.screen));
-
+        let hash = window.location.hash.slice(1);
 
         // If a non-valid hash is entered, show the 404 page.
         if(!routes.map(route => route.name).includes(hash))
@@ -213,20 +177,34 @@ window.onload = function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
-  model.setNumberOfGuests(2);
 
     Router.getRouter();
-
-    Router.addRoute("test", ["test", "test"]);
-    Router.deleteRoute("test");
-
-
     let hash = window.location.hash;
 
     window.location.hash = 'loader';
-    //window.location.hash = 'details:id:592479';
 
-    Promise.all([model.getDish(364), model.getDish(44)])
+    const homeView = new HomeView(container("home"), model);
+    const subheadingView = new SubheadingView(container("subheading"), model);
+    const overviewView = new OverviewView(container("overview"), model);
+    const searchView = new SearchView(container("search"), model);
+    const printoutView = new PrintOutView(container("print"), model);
+    const sidebarView = new SidebarView(container("sidebar"), model);
+    const detailsView = new DetailsView(container("details"), model);
+
+    new HomeController(homeView, model).renderView();
+    new SubheadingController(subheadingView, model).renderView();
+    new OverviewController(overviewView, model).renderView();
+    new PrintoutController(printoutView, model).renderView();
+    new SidebarController(sidebarView, model).renderView();
+    new DetailsController(detailsView, model).renderView();
+    new SearchController(searchView, model).renderView();
+
+    if(!hash)
+        window.location.hash = 'home';
+    else
+        window.location.hash = hash;
+
+    /*Promise.all([model.getDish(364), model.getDish(44)])
         .then(function(values) {
 
             for(const element of values) {
@@ -254,6 +232,6 @@ window.onload = function () {
             else
                 window.location.hash = hash;
         })
-        .catch(console.error);
+        .catch(console.error);*/
 
 };

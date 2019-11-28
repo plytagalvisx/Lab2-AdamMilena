@@ -23,7 +23,7 @@ class SearchView {
                                 make("option", "Appetizer")
                             ])
                         ]),
-                        makeButton("search-dish-button", "", "#search", "search"),
+                        makeWithAttr("a", "search-dish-button", "", "search"),
                     ]),
                 ]),
 
@@ -37,32 +37,25 @@ class SearchView {
     }
 
     async afterRender() {
-        let title = "FIND A DISH";
-        if(this.model.getFullMenu()) {
-            title = "ADD ANOTHER ONE";
-        }
-        this.container.querySelector("#updateTitle").textContent = title;
-
-        //let dishes = await this.model.getAllDishes();
+        this.model.addObserver(["dishes"], this.update.bind(this), this);
     }
 
     update(dishes) {
         // TODO Lab3
 
+        let title = "ADD ANOTHER ONE";
+        if(!dishes) {
+            title = "FIND A DISH";
+        }
+        this.container.querySelector("#updateTitle").textContent = title;
+
         dishes.map(dish => {
             this.container.querySelector("#dishes-items").append(
                 makeWithAttr("div", "", "dish", [
                           makeWithAttr("a", dish.id, "clickableImage",[
-                        //makeButton(dish.id, "clickableImage", /*"#details:547775",*/ "#details:" + dish.id, [
                             makeImage("","dish-image", "https://spoonacular.com/recipeImages/" + dish.image),
                             makeWithAttr("p","","dish-text", dish.title),
-                       // ]),
-                          ]),
-
-                        // Lösningar på testerna:
-                        makeWithAttr("p","displayNone","value-main-course-name", "Breakfast Pizza"), // kan ej läsa av dish.title
-                        makeWithAttr("div", "displayNone", "value-num-guests", this.model.getNumberOfGuests()), // ligger i sidebarView
-                        makeWithAttr("div", "displayNone", "value-total-price", this.model.getTotalMenuPrice()) // ligger i sidebarView
+                          ])
                 ])
             )});
     }

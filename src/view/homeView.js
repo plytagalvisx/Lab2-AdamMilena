@@ -11,7 +11,7 @@ class HomeView {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel laoreet orci. Nullam ut iaculis diam. Aliquam\n" +
               "          magna nulla, congue ut elementum hendrerit, dignissim at mauris. Quisque ac felis sed nibh elementum euismod a sit amet\n" +
               "          arcu. Maecenas a efficitur leo."),
-          makeButton("startBtn", "startBtn", "#search", "Create new dinner")
+            makeWithAttr("a", "startBtn", "startBtn", "Create new dinner")
         ]),
 
     );
@@ -21,8 +21,4 @@ class HomeView {
   afterRender() {
     this.startBtn = this.container.getElementsByClassName("#startBtn");
   }
-
-    update(payload) {
-        // TODO Lab3
-    }
 }

@@ -9,6 +9,13 @@ class HomeController {
     renderView() {
         this.view.render();
         // TODO lab 3
+
+        let createNewDinnerBtn = this.view.container.querySelector("#startBtn");
+        let listener = function() {
+            GSC('home', 'startBtn');
+        }
+        createNewDinnerBtn.addEventListener('click', listener);
+
     }
 
     // TODO Lab 3

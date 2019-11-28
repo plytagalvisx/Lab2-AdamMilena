@@ -1,8 +1,7 @@
 class SearchController {
-    constructor(view, model, detailsController) {
+    constructor(view, model) {
         this.view = view;
         this.model = model;
-        this.detailsController = detailsController;
 
         // TODO lab 3
         this.receiveDishesFromAPI = this.searchAllDishes.bind(this);
@@ -15,32 +14,12 @@ class SearchController {
         await this.receiveDishesFromAPI();
 
         /* The user can search for dishes in search view */
-        console.log("Find a dish Event:");
         let searchAllDishes = this.searchAllDishes.bind(this);
         let listener = function() {
             searchAllDishes();
         };
         let searchBtn = this.view.container.querySelector("#search-dish-button");
         searchBtn.addEventListener('click', listener);
-
-
-
-        /* The user can click on the dish item in the search view */
-        /*let listener2 = function(dishItem) {
-            let dishItemClassName = dishItem.target.parentElement.className;
-            if (dishItemClassName === 'clickableImage')
-            {
-                let dishItemId = dishItem.target.parentElement.id;
-                console.log("dishItemId: ", dishItemId);
-                let conditionWithId = ':' + dishItemId;
-                this.model.getDish(id).then(dish => {
-                    GSC('search', 'smallDishBtn');
-                });
-                GSC('search', 'search:dishid', dishItemId)
-            }
-        };
-        let clickedImage = this.view.container.querySelector('#dishes-items');
-        clickedImage.addEventListener('click', listener2);*/
 
         let clickedImage = this.view.container.querySelector('#dishes-items');
         clickedImage.addEventListener('click', dishItem => {
@@ -49,15 +28,11 @@ class SearchController {
             {
                 let dishItemId = dishItem.target.parentElement.id;
                 console.log("dishItemId: ", dishItemId);
-                window.location.hash = "loader";
-                this.detailsController.sendOverToDetailsView(dishItemId);
+                this.model.getDish(dishItemId).then(dish => this.model.setDishDetails(dish));
                 GSC('search', 'search:dishid');
             }
         });
-
     }
-
-    // TODO Lab 3
 
     searchAllDishes() {
         return new Promise(resolve => {
