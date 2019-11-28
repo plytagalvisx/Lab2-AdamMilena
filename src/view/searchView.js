@@ -37,17 +37,15 @@ class SearchView {
     }
 
     async afterRender() {
-        this.model.addObserver(["dishes"], this.update.bind(this), this);
+        let title = "FIND A DISH";
+        if(this.model.getFullMenu()) {
+            title = "ADD ANOTHER ONE";
+        }
+        this.container.querySelector("#updateTitle").textContent = title;
     }
 
     update(dishes) {
         // TODO Lab3
-
-        let title = "ADD ANOTHER ONE";
-        if(!dishes) {
-            title = "FIND A DISH";
-        }
-        this.container.querySelector("#updateTitle").textContent = title;
 
         dishes.map(dish => {
             this.container.querySelector("#dishes-items").append(
@@ -55,7 +53,7 @@ class SearchView {
                           makeWithAttr("a", dish.id, "clickableImage",[
                             makeImage("","dish-image", "https://spoonacular.com/recipeImages/" + dish.image),
                             makeWithAttr("p","","dish-text", dish.title),
-                          ])
+                          ]),
                 ])
             )});
     }

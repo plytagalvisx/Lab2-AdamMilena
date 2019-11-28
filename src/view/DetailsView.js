@@ -37,7 +37,6 @@ class DetailsView {
     }
 
     async update(dish, guests) {
-        // TODO Lab3
         this.clearDetails();
         GSC('search', 'viewDetails');
         this.container.querySelector("#details-left-container").append(
@@ -55,7 +54,7 @@ class DetailsView {
         dish.extendedIngredients.map(ingredient => {
             this.container.querySelector("#details-ingredient-list").append(
                 makeWithAttr("div", "", "details-ingredient-dish", [
-                    makeWithAttr("div", "" ,"amount", ingredient.amount*guests + " " + ingredient.measures.metric.unitShort),
+                    makeWithAttr("div", "" ,"amount", ingredient.measures.metric.amount*guests + " " + ingredient.measures.metric.unitShort),
                     makeWithAttr("div","","ingredient", ingredient.name)
                 ]),
             )

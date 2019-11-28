@@ -2,15 +2,12 @@ class SearchController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
-
-        // TODO lab 3
         this.receiveDishesFromAPI = this.searchAllDishes.bind(this);
     }
 
     async renderView() {
         this.view.render();
 
-        // TODO lab 3
         await this.receiveDishesFromAPI();
 
         /* The user can search for dishes in search view */
@@ -32,6 +29,7 @@ class SearchController {
                 GSC('search', 'search:dishid');
             }
         });
+
     }
 
     searchAllDishes() {

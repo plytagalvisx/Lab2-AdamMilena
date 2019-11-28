@@ -74,6 +74,7 @@
 #vertline {
     border-left: 3px solid darkgray;
     margin: 2%;
+    height: 80%;
 }
 
 @media (max-width: 450px) {

@@ -8,9 +8,8 @@ class OverviewView {
         this.container.append(
             makeWithAttr("div", "overviewmain", "main", [
                 makeWithAttr("div","dishes-container","", [
-                    makeWithAttr("ul", "overview-dishes-items", "", [
-                        makeWithAttr("div", "vertline", "", ""),
-                        ]),
+                    makeWithAttr("ul", "overview-dishes-items", "", ""),
+                    makeWithAttr("div", "vertline", "", ""),
                     makeWithAttr("div","price-container","", [
                         make("div",  "Total: "),
                     ]),
@@ -24,14 +23,13 @@ class OverviewView {
     }
 
     async afterRender() {
-        this.model.addObserver(["dishes", "prices"], this.update.bind(this), this);
+        this.model.addObserver(["dishes", "price"], this.update.bind(this), this);
     }
 
     update(dishes, price) {
-        // TODO Lab3
 
-        this.container.querySelector('#overview-dishes-items').textContent = '';
-        this.container.querySelector('#price-container').textContent = '';
+        this.container.querySelector("#overview-dishes-items").textContent = '';
+        this.container.querySelector("#price-container").textContent = '';
 
         dishes.map(dish =>  {
             this.container.querySelector("#overview-dishes-items").prepend(
@@ -41,6 +39,7 @@ class OverviewView {
                 ]),
             )});
 
+        console.log(price);
         this.container.querySelector("#price-container").append(
             make("div", Math.round(price) + " SEK")
         );

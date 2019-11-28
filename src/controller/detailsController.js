@@ -4,20 +4,17 @@ class DetailsController {
         this.model = model;
     }
 
-    update() {
-    }
-
     async renderView() {
-        this.view.render();
-        this.view.container.querySelector("#backToSearchBtn").addEventListener('click', () => {
+         this.view.render();
+         this.view.container.querySelector("#backToSearchBtn").addEventListener('click', () => {
              GSC('details', 'goBackBtn')
          }, false);
 
          this.view.container.querySelector("#addToMenuBtn").addEventListener('click', async () => {
-             let dish = this.model.getDishDetails();
-             console.log(dish);
-             this.model.addDishToMenu(dish);
+             this.model.addDishToMenu(this.model.getDishDetails());
              GSC('details', 'addToMenuBtn');
          }, false);
     }
+
+
 }

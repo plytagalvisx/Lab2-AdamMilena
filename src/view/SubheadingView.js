@@ -18,11 +18,11 @@ class SubheadingView {
         this.afterRender();
     }
 
-    afterRender() {
+    async afterRender() {
         this.model.addObserver(['numberOfGuests'], this.update.bind(this), this);
     }
 
-    update(guest) {
+    async update(guest) {
         this.container.querySelector("#numGuests").innerHTML = guest;
         if(guest === 1)
             this.container.querySelector("#people").innerHTML = "person";

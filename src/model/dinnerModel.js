@@ -1,24 +1,30 @@
 class DinnerModel {
 
   constructor() {
-    this.store = Redux.createStore(this.reducer,
-        { numberOfGuests: 0,
-          dishes: [],
-          dishDetails: [],
-          price: 0,
-        });
+    const storedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {
+      numberOfGuests: 0,
+      dishes: [],
+      dishDetails: [],
+      price: 0,
+    };
+    this.store = Redux.createStore(this.reducer, storedState);
     this.subscribers = [];
-    // numberOfGuests, price, dishes
     this.store.subscribe(this.notifyObservers.bind(this));
-    this.setDishDetails(this.getDish(1));
+    this.store.subscribe(() => {localStorage.setItem('state', JSON.stringify(this.store.getState()))});
+    this.setDishDetails(this.getDish(582897)); // to get rid of an unwanted undefined.
     this.change = undefined;
+  }
+
+  startUpValuesToObservers() {
+    let state = this.store.getState();
+
+    this.subscribers.map(subscriber => {
+      subscriber.func(...subscriber.property.map(property => state[property]))
+    });
   }
 
   addObserver(property, callback, subscriber) {
     this.subscribers.push({property: property, func: callback, subscriber: subscriber});
-    if(!this.change) {
-      this.notifyObservers();
-    }
   }
 
   setDishDetails(dish) {
@@ -34,7 +40,7 @@ class DinnerModel {
     let state = this.store.getState();
 
     this.subscribers.map(subscriber => {
-      if(!this.change || subscriber.property.includes(this.change))
+      if(subscriber.property.includes(this.change))
         subscriber.func(...subscriber.property.map(property => state[property]))
     });
   }

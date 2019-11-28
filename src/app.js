@@ -177,6 +177,7 @@ window.onload = function () {
   console.log("start");
   //We instantiate our model
   const model = new DinnerModel();
+  model.setNumberOfGuests(1);
 
     Router.getRouter();
     let hash = window.location.hash;
@@ -198,6 +199,8 @@ window.onload = function () {
     new SidebarController(sidebarView, model).renderView();
     new DetailsController(detailsView, model).renderView();
     new SearchController(searchView, model).renderView();
+
+    model.startUpValuesToObservers();
 
     if(!hash)
         window.location.hash = 'home';
