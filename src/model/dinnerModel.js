@@ -11,7 +11,7 @@ class DinnerModel {
     this.subscribers = [];
     this.store.subscribe(this.notifyObservers.bind(this));
     this.store.subscribe(() => {localStorage.setItem('state', JSON.stringify(this.store.getState()))});
-    this.setDishDetails(this.getDish(582897)); // to get rid of an unwanted undefined.
+    this.setDishDetails(this.getDish(547775)); // to get rid of an unwanted undefined.
     this.change = undefined;
   }
 

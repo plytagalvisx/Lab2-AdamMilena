@@ -12,7 +12,15 @@ class PrintOutView {
     }
 
     afterRender() {
-        let dishes = this.model.getFullMenu();
+        this.model.addObserver(["dishes"], this.update.bind(this), this);
+    }
+
+    update(dishes) {
+        // TODO Lab3
+
+        //let dishes = this.model.getFullMenu();
+        this.container.querySelector("#print-container").textContent = '';
+
         dishes.map(dish =>  {
             this.container.querySelector("#print-container").append(
                 makeWithAttr("div", "", "print-cluster", [
@@ -26,9 +34,5 @@ class PrintOutView {
                 ])
             );
         });
-    }
-
-    update(payload) {
-        // TODO Lab3
     }
 }

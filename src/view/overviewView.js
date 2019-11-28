@@ -39,7 +39,7 @@ class OverviewView {
                 ]),
             )});
 
-        console.log(price);
+        //console.log(price);
         this.container.querySelector("#price-container").append(
             make("div", Math.round(price) + " SEK")
         );

@@ -104,6 +104,7 @@ const Router = (function() {
     const transits = [
         {initState: 'home', condition: 'startBtn', nextState: 'search'},
         {initState: 'overview', condition: 'toPrintBtn', nextState: 'print'},
+        {initState: 'overview', condition: 'toPrintBtn2', nextState: 'loader'},
         {initState: 'overview', condition: 'goBackBtn', nextState: 'search'},
         {initState: 'search', condition: 'confirmBtn', nextState: 'overview'},
         {initState: 'search', condition: 'search?searchString', nextState: 'search'},

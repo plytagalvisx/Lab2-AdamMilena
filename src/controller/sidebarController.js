@@ -36,11 +36,10 @@ class SidebarController {
         let removeDishButton = this.view.container.querySelector('#sidebar-dishes');
         removeDishButton.addEventListener('click', dishItem => {
             let dishItemClassName = dishItem.target.parentElement.firstElementChild.className;
-            console.log("SUP: ", dishItemClassName);
             if (dishItemClassName === 'removeBtn')
             {
                 let dishItemId = dishItem.target.parentElement.firstElementChild.id;
-                console.log("dishItemId: ", dishItemId);
+                console.log("removed dish: ", dishItemId);
 
                 let dishes = this.model.getFullMenu();
                 dishes.map(dish => {
