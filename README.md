@@ -25,7 +25,7 @@ bellow to install all the neded dependencies (e.g. the framework libraries) and 
 * `src/index.js` - this is where React is started. You will normally not need to modify this file, but you can check it to see how React is started and how it calls the App - which is our root component.
 * `src/index.css` - put your global styles here
 * `src/App.js` - root component you can modify it's HTML and add different routes to it
-* `src/Dishes`, `src/SelectDish` etc. - contain the `.js` and `.css` file for each component. You should create your own components roughly corresponding to your views from previous labs.
+* `src/Search`, `src/SearchView` etc. - contain the `.js` and `.css` file for each component. You should create your own components roughly corresponding to your views from previous labs.
 
 Check the components and see how they work. There are additional comments in the code.
 

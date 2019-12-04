@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import Welcome from "./Welcome/Welcome";
+import HomeView from "./HomeView/HomeView";
 import modelInstance from "./data/DinnerModel";
-import SelectDish from "./SelectDish/SelectDish";
+import SearchView from "./SearchView/SearchView";
 import "./App.css";
 
 class App extends Component {
@@ -15,18 +15,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header style={{display: "grid"}} className="App-header">
-          <h1 id="container-header" className="App-title">{this.state.title}</h1>
+        <div className="App">
+          <header className="App-header">
+            <p className="App-title">{this.state.title}</p>
+          </header>
 
           {/* We rended diffrent component based on the path */}
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" component={HomeView} />
           <Route
-            path="/search"
-            render={() => <SelectDish model={modelInstance} />}
+              path="/search"
+              render={() => <SearchView model={modelInstance} />}
           />
-        </header>
-      </div>
+
+        </div>
     );
   }
 }
