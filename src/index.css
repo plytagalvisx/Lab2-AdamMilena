@@ -6,25 +6,6 @@ body {
     box-sizing: border-box;
 }
 
-.dish-image {
-    border: 3px solid black;
-    margin: 0;
-    padding: 0;
-    height: 200px;
-    max-width: 100%;
-    width: 200px;
-}
-
-.dish-text {
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-}
-
-
 .container-page-content {
     display: grid;
     grid-template-columns: 20% 80%;

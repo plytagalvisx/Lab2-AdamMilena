@@ -1,50 +1,43 @@
-# Interaction Programing - Lab 2
-This project contains the startup code for Lab 2, which focuses on the model. For more details on how to complete the 
-assignment follow the instructions on the 
-[course website](https://kth.instructure.com/courses/19629/assignments/100300).
+# Dinner Planner React
 
-## Git Setup instructions
-* You will need a KTH Gits account. You can access it by logging in with your KTH.se account credentials. The login button is placed to the right in the navigation bar. Click [here](https://intra.kth.se/en/it/programvara-o-system/system/kth-github/kth-github-1.500062) for more information about your KTH Gits account.
-Follow these steps in detail to be able to work with GitHub from your computer
-    * Generate a new ssh key: 
-    https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
-    * Add the ssh key to GitHub: 
-    https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account
-* Fork the startup code ([KTH Gits](https://gits-15.sys.kth.se/iprog/dinnerplanner-html/tree/lab1-with-tests)) - 
-the button is in the upper right corner
-* Clone your new repository to the computer (either using GitHub Desktop App or terminal)
-    * If you’re using the command line you will have to type “git clone <ssh_url>”
-    * Find the ssh_url here in your forked repository on GitHub
-    * Remember to make sure you’re cloning with SSH, and not with HTTPS. 
+## How to get started
 
-## Configuring the API
-This application uses the [spoonacular API](https://rapidapi.com/spoonacular/api/recipe-food-nutrition). In order for 
-the application to work it needs to have access to that api. In order to grant the application access to the api you 
-must rename *apiConfig.js.template* to *apiConfig.js* in */src/model/*. Then fill in the ENDPOINT and API_KEY 
-constants with the endpoint for making API fetches and your spoontacular api key. Once you've done so, these 
-constants can be used in */src/model/dinnerModel.js*.  
+Since modern frameworks use some advanced features like compiling the templates and source code in pure
+JavaScript and dynamically loading the needed content, you cannot anymore just open the HTML file 
+in the browser. Instead, you will need a local webserver that will serve your app. Follow the instructions 
+bellow to install all the neded dependencies (e.g. the framework libraries) and the development webserver.
 
-**IMPORTANT:** Do not name the file anything other than *apiConfig.js*, otherwise your api key might end up on 
-github. If you do rename the file to something other than *apiConfig.js*, then be sure to include that file in the 
-[gitignore](https://git-scm.com/docs/gitignore)!
+1. First, make sure that you have npm installed on your system (follow the instructions
+   at [Installing Node](https://docs.npmjs.com/getting-started/installing-node). The computers in the lab rooms
+   should already have it, you will just need to do `module add node` to activate it (every time
+   you start the terminal).
 
-## Testing
-Open `index.html` in the browser and tests should run automatically
+2. Run `npm install` through the terminal in the root of the repository. Let it
+   install all the dependencies.
 
-## What's in this repo
-TODO: describe the view files here.
-* [index.html](/index.html) - open to run the tests. 
-* [src/model/dinnerModel.js](/src/model/dinnerModel.js) - write code here. This is a skeleton for the model of the 
-application, but it does not yet support the functionality needed (number of guests, selected dishes, et.c.). It also 
-contains a first dummy hardcoded "database" to use as test data.
-* [src/model/dinnerModel.test.js](/src/model/dinnerModel.test.js) - tests for the model. You do not need to modify 
-these, but study how they are written. You might be asked to write more tests in the future. In your opinion, do 
-these tests cover the most important areas, or would you have written them differently? 
+3. Run `npm start` through the terminal. This will start the webserver and the application should pop up in your
+   browser ready for use. Alternatively you can open in through [http://localhost:3000]. Whenever you make changes in your code and save, the browser will update automatically, so you don't have to click refresh anymore.
 
-* [src/app.js](/src/app.js) - this is the overall code of the application. It is responsible for initial setup of the 
-app (when the page loads for the first time). You will find it more relevant when you start working with views in 
-future labs.
-* [images/](/images) - folder contains some pictures you can use for your dishes.
+## Understanding the startup code
+
+* `public/index.html` - this is the static html file, and as opposed to previous labs, we don't put view's HTML here. It should only contain HTML that's shared among all the views (e.g. header, footer)
+* `src/data/DinnerModel.js` - example of dinner model with number of guests, getAllDishes function implemented using `fetch()` and Observer pattern. You can copy other functions from your original model (and modify as needed to make it work with ES6 JavaScript class)
+* `src/index.js` - this is where React is started. You will normally not need to modify this file, but you can check it to see how React is started and how it calls the App - which is our root component.
+* `src/index.css` - put your global styles here
+* `src/App.js` - root component you can modify it's HTML and add different routes to it
+* `src/Dishes`, `src/SelectDish` etc. - contain the `.js` and `.css` file for each component. You should create your own components roughly corresponding to your views from previous labs.
+
+Check the components and see how they work. There are additional comments in the code.
+
+## What you need to do
+
+* reimplement the missing views following React practices
+* use [Router](https://reacttraining.com/react-router/web/guides/philosophy) to map different url address (e.g. /search, /dish/ID) to specific components (the startup code already does that for welcome screen and select dish screen)
+* implement cookies or localStorage so that the numberOfGuests and menu are persisted on the page reload
 
 
+## Credits
 
+* Michel Tabari for fine tunning the code
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
