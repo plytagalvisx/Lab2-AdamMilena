@@ -60,12 +60,20 @@ class DinnerModel extends ObservableModel {
     }
 
     //Adds the passed dish to the menu.
-    addDishToMenu(dishToAdd) {
-        //if(this.menu.map(dish => dish.id === dishToAdd.id))
-        //  return;
-        this.state.menu.push(dishToAdd);
-        this.updateLocalStorage();
-        console.log(this.getFullMenu());
+    addDishToMenu(dish) {
+        let bool;
+        this.state.menu.forEach(menuDish => {
+            if(menuDish.id === dish.id)
+                bool = true;
+        });
+
+        if (!bool) {
+            this.state.menu.push(dish);
+            this.updateLocalStorage();
+            this.notifyObservers("dish added");
+        }
+        else
+            alert("Dish already in menu.");
     }
 
     //Removes dish with specified id from menu

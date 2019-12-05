@@ -68,10 +68,10 @@ class Dishes extends Component {
                 break;
             case "LOADED":
                 dishesList = this.state.dishes.map(dish => (
-                    <Link to={"/details/" + dish.id}>
+                    <Link key={dish.id} to={"/details/" + dish.id}>
                         <div id="dishes-items" /*className="flex-between-search2"*/>
                             <div className="dish">
-                                <img alt="" class="dish-image" src={"https://spoonacular.com/recipeImages/" + dish.image}/>
+                                <img className="dish-image" alt="" src={"https://spoonacular.com/recipeImages/" + dish.image}/>
                                 <p className="dish-text">{dish.title}</p>
                             </div>
                         </div>

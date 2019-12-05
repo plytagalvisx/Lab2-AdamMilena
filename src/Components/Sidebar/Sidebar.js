@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./Sidebar.css";
-import modelInstance from "../../data/DinnerModel";
 import {Link} from "react-router-dom";
 
 class Sidebar extends Component {
@@ -11,7 +10,7 @@ class Sidebar extends Component {
         this.state = {
             numberOfGuests: this.props.model.getNumberOfGuests(),
             dishes: this.props.model.getFullMenu(),
-            price: this.props.model.getTotalMenuPrice()
+            price: this.props.model.getTotalMenuPrice(),
         };
         this.removeDishFromMenuButton = this.removeDishFromMenuButton.bind(this);
     }
@@ -35,7 +34,7 @@ class Sidebar extends Component {
         this.setState({
             numberOfGuests: this.props.model.getNumberOfGuests(),
             dishes: this.props.model.getFullMenu(),
-            price: this.props.model.getTotalMenuPrice()
+            price: this.props.model.getTotalMenuPrice(),
         });
     }
 
@@ -44,16 +43,13 @@ class Sidebar extends Component {
         this.props.model.setNumberOfGuests(e.target.value);
     };
 
-    removeDishFromMenuButton() {
-        let dishes = this.state.dishes;
-        dishes.map(dish => {
-                this.props.model.removeDishFromMenu(dish.id);
-        });
+    removeDishFromMenuButton(dishId) {
+        this.props.model.removeDishFromMenu(dishId);
         console.log("The dish has been removed");
     }
 
     render() {
-        let dishesContainer;
+        let dishesContainer = null;
         let guests = this.state.numberOfGuests;
         let price = this.state.price;
 
@@ -63,37 +59,37 @@ class Sidebar extends Component {
                     <div>{dish.title}</div>
                     <div>{Math.round(dish.pricePerServing * guests)}</div>
                     <Link to="/search">
-                        <a id="removeDishBtn" className="removeDishBtn" onClick={this.removeDishFromMenuButton}>
+                        <button id="removeDishBtn" className="removeDishBtn" onClick={() => this.removeDishFromMenuButton(dish.id)}>
                             <p className="removeBtn">&#x1f5d1;</p>
-                        </a>
+                        </button>
                     </Link>
                 </div>
-                )),
+            )),
 
-            <div className="Sidebar">
-                <div id="sidebar-top">
-                    <div>My Dinner</div>
-                    <div className="SEK-text">SEK {price}</div>
-                    <a id="collapse-sidebar-btn" className="hamburger"></a>
-                </div>
-                <div className="collapsible">
-                    <div id="sidebar-people">People:</div>
-                    <input id="sidebar-num-people" type="number" value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
-                    <div id="flex-between">
-                        <div>Dish Name</div>
-                        <div>Cost</div>
+                <div className="Sidebar">
+                    <div id="sidebar-top">
+                        <div>My Dinner</div>
+                        <div className="SEK-text">SEK {price}</div>
+                        <button id="collapse-sidebar-btn" className="hamburger"/>
                     </div>
-                    <div id="sidebar-dishes">{dishesContainer}</div>
-                    <div id="sidebar-cost">
-                        <div>SEK {Math.round(price)}</div>
-                    </div>
+                    <div className="collapsible">
+                        <div id="sidebar-people">People:</div>
+                        <input id="sidebar-num-people" type="number" value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
+                        <div id="flex-between">
+                            <div>Dish Name</div>
+                            <div>Cost</div>
+                        </div>
+                        <div id="sidebar-dishes">{dishesContainer}</div>
+                        <div id="sidebar-cost">
+                            <div>SEK {Math.round(price)}</div>
+                        </div>
 
-                    <div id="sidebar-confirm"></div>
-                    <Link to="/">
-                        <button id="sidebarBtn" className="startBtn">Confirm Dinner</button>
-                    </Link>
+                        <div id="sidebar-confirm"></div>
+                        <Link to="/overview">
+                            <button id="sidebarBtn" className="startBtn">Confirm Dinner</button>
+                        </Link>
+                    </div>
                 </div>
-            </div>
         );
     }
 }

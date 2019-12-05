@@ -5,6 +5,8 @@ import modelInstance from "./data/DinnerModel";
 import SearchView from "./SearchView/SearchView";
 import "./App.css";
 import DetailsView from "./DetailsView/DetailsView";
+import OverviewView from "./OverviewView/OverviewView";
+import PrintoutView from "./PrintoutView/PrintoutView";
 
 class App extends Component {
     constructor(props) {
@@ -30,6 +32,16 @@ class App extends Component {
                 <Route
                     path="/details"
                     render={() => <DetailsView model={modelInstance}/>}
+                />
+
+                <Route
+                    path="/overview"
+                    render={() => <OverviewView model={modelInstance}/>}
+                />
+
+                <Route
+                    path="/printout"
+                    render={() => <PrintoutView model={modelInstance}/>}
                 />
 
             </div>

@@ -79,14 +79,14 @@ class Dish extends Component {
             case "LOADED":
                 dishDisplay = (
                     dishIngredientsDetails = dish.extendedIngredients.map(ingredient => (
-                        <div className="details-ingredient-dish">
+                        <div key={ingredient.name} className="details-ingredient-dish">
                             <div
                                 className="amount">{ingredient.measures.metric.amount * guests + " " + ingredient.measures.metric.unitShort}</div>
                             <div className="ingredient">{ingredient.name}</div>
                         </div>
                     )),
 
-                        <div id="details-container">
+                        <div key={dish.id} id="details-container">
                             <div id="details-ingredients">
                                 <div id="details-ingredient-header" className="ingredient">Ingredients
                                     for: {guests} people
