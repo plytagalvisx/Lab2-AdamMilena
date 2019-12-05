@@ -8,6 +8,7 @@ import "./Dish.css";
 class Dish extends Component {
     constructor(props) {
         super(props);
+        let hash = window.location.href.split("/")[4];
 
         // We create the state to store the various statuses
         // e.g. API data loading or error
@@ -16,7 +17,7 @@ class Dish extends Component {
             status: "LOADING",
             numberOfGuests: this.props.model.getNumberOfGuests(),
             dishDetails: '',
-            dishId: window.location.href.split("/")[4]      // Dish ID hämtas via hash/href
+            dishId: hash      // Dish ID hämtas via hash/href
         };
     }
 
