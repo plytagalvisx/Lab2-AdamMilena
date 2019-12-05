@@ -1,9 +1,5 @@
 import ObservableModel from "./ObservableModel";
-
-const BASE_URL = "http://sunset.nada.kth.se:8080/iprog/group/40";
-const httpOptions = {
-    headers: {"X-Mashape-Key": "3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"}
-};
+import * as Constants from "./apiConfig";
 
 class DinnerModel extends ObservableModel {
     constructor() {
@@ -26,12 +22,24 @@ class DinnerModel extends ObservableModel {
      */
     setNumberOfGuests(num) {
         this._numberOfGuests = num;
-        this.notifyObservers();
+        this.notifyObservers("a number of guests has changed");
     }
 
+    // Returns a dish of specific ID
+    getDish(id) {
+        if(!id)
+            id = '';
+
+        this.url = `${Constants.ENDPOINT}/recipes/${id}/information`;
+        return fetch(this.url, Constants.httpOptions).then(this.processResponse);
+    }
+
+    // Returns all dishes of specific type (i.e. "starter", "main dish" or "dessert").
+    // query argument, text, if passed only returns dishes that contain the query in name or one of the ingredients.
+    // if you don't pass any query, all the dishes will be returned
     getAllDishes(type, query) {
-        this.url = `${BASE_URL}/recipes/search?number=10&offset=0&type=${type}&query=${query}`;
-        return fetch(this.url, httpOptions).then(this.processResponse);
+        this.url = `${Constants.ENDPOINT}/recipes/search?number=10&offset=0&type=${type}&query=${query}`;
+        return fetch(this.url, Constants.httpOptions).then(this.processResponse);
     }
 
     processResponse(response) {

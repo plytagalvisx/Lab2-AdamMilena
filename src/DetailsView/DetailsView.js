@@ -7,7 +7,7 @@ class DetailsView extends Component {
     render() {
         return (
             <div className="selectedDish">
-                <Dish/>
+                <Dish model={this.props.model}/>
                 {/* We pass the model as property to the Sidebar component */}
                 <Sidebar model={this.props.model}/>
             </div>

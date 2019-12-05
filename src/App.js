@@ -10,10 +10,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "Dinner Planner"
+            title: "Dinner Planner",
         };
     }
-
     render() {
         return (
             <div className="App">
