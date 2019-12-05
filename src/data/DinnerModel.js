@@ -4,8 +4,16 @@ import * as Constants from "./apiConfig";
 class DinnerModel extends ObservableModel {
     constructor() {
         super();
-        this._numberOfGuests = 4;
-        this.getNumberOfGuests();
+        this.state = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {
+            numberOfGuests: 0,
+            menu: [],
+            price: 0,
+        };
+        //this.getNumberOfGuests();
+    }
+
+    updateLocalStorage() {
+        localStorage.setItem('state', JSON.stringify(this.state));
     }
 
     /**
@@ -13,7 +21,7 @@ class DinnerModel extends ObservableModel {
      * @returns {number}
      */
     getNumberOfGuests() {
-        return this._numberOfGuests;
+        return this.state.numberOfGuests;
     }
 
     /**
@@ -21,8 +29,49 @@ class DinnerModel extends ObservableModel {
      * @param {number} num
      */
     setNumberOfGuests(num) {
-        this._numberOfGuests = num;
+        if(num < 0)
+            num = 0;
+        this.state.numberOfGuests = num;
+        this.updateLocalStorage();
         this.notifyObservers("a number of guests has changed");
+    }
+
+    //Returns the dish that is on the menu for selected type
+    getSelectedDishes(type) {
+        return this.state.menu.filter(dish => dish.dishTypes.includes(type));
+    }
+
+    //Returns all the dishes on the menu.
+    getFullMenu() {
+        return this.state.menu;
+    }
+
+    //Returns all ingredients for all the dishes on the menu.
+    getAllIngredients() {
+        return this.state.menu.map(dish => dish.extendedIngredients.map(name => name.name)).flat();
+    }
+
+    //Returns the total price of the menu (price per serving of each dish multiplied by number of guests).
+    getTotalMenuPrice() {
+        let prices = this.state.menu.map(dish => dish.pricePerServing);
+        let guests = this.getNumberOfGuests();
+        let sum = prices.reduce((total, amount) => total + amount, 0);
+        return sum*guests;
+    }
+
+    //Adds the passed dish to the menu.
+    addDishToMenu(dishToAdd) {
+        //if(this.menu.map(dish => dish.id === dishToAdd.id))
+        //  return;
+        this.state.menu.push(dishToAdd);
+        this.updateLocalStorage();
+        console.log(this.getFullMenu());
+    }
+
+    //Removes dish with specified id from menu
+    removeDishFromMenu(id) {
+        let dish = this.getDish(id);
+        this.state.menu.pop(dish);
     }
 
     // Returns a dish of specific ID

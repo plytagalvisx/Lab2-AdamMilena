@@ -71,7 +71,7 @@ class Dishes extends Component {
                     <Link to={"/details/" + dish.id}>
                         <div id="dishes-items" /*className="flex-between-search2"*/>
                             <div className="dish">
-                                <img class="dish-image" src={"https://spoonacular.com/recipeImages/" + dish.image}/>
+                                <img alt="" class="dish-image" src={"https://spoonacular.com/recipeImages/" + dish.image}/>
                                 <p className="dish-text">{dish.title}</p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ class Dishes extends Component {
                                 <option>Appetizer</option>
                             </select>
                         </label>
-                        <a id="search-dish-button" onClick={this.pressSearchButton}>Search</a>
+                        <button id="search-dish-button" onClick={this.pressSearchButton}>Search</button>
                     </div>
 
                     <div className="Dishes">

@@ -19,6 +19,7 @@ class Dish extends Component {
             dishDetails: '',
             dishId: hash      // Dish ID hämtas via hash/href
         };
+        this.addToMenuButton = this.addToMenuButton.bind(this);
     }
 
     // this methods is called by React lifecycle when the
@@ -58,6 +59,10 @@ class Dish extends Component {
         });
     }
 
+    addToMenuButton() {
+        this.props.model.addDishToMenu(this.state.dishDetails);
+    }
+
     render() {
         let guests = this.state.numberOfGuests;
         let dish = this.state.dishDetails;
@@ -93,16 +98,16 @@ class Dish extends Component {
                                     <div>SEK {Math.round(dish.pricePerServing * guests)}</div>
                                 </div>
                                 <Link to="/search">
-                                    <a id="addToMenuBtn" className="startBtn">Add to
-                                        menu</a>
+                                    <button id="addToMenuBtn" className="startBtn" onClick={this.addToMenuButton}>Add to
+                                        menu</button>
                                 </Link>
                             </div>
                             <div id="details-left-container">
                                 <div className="details-heading">{dish.title}</div>
-                                <img className="details-image" src={dish.image}/>
+                                <img alt="" className="details-image" src={dish.image}/>
                                 <div id="details-image-text">{dish.winePairing.pairingText}</div>
                                 <Link to="/search">
-                                    <a id="backToSearchBtn" className="backBtn">Back to search</a>
+                                    <button id="backToSearchBtn" className="backBtn">Back to search</button>
                                 </Link>
                             </div>
                             <div id="details-preparation">

@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import "./Sidebar.css";
+import modelInstance from "../../data/DinnerModel";
+import {Link} from "react-router-dom";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -7,8 +9,11 @@ class Sidebar extends Component {
 
         // we put on state the properties we want to use and modify in the component
         this.state = {
-            numberOfGuests: this.props.model.getNumberOfGuests()
+            numberOfGuests: this.props.model.getNumberOfGuests(),
+            dishes: this.props.model.getFullMenu(),
+            price: this.props.model.getTotalMenuPrice()
         };
+        this.removeDishFromMenuButton = this.removeDishFromMenuButton.bind(this);
     }
 
     // this methods is called by React lifecycle when the
@@ -28,7 +33,9 @@ class Sidebar extends Component {
     // cause the component to re-render
     update() {
         this.setState({
-            numberOfGuests: this.props.model.getNumberOfGuests()
+            numberOfGuests: this.props.model.getNumberOfGuests(),
+            dishes: this.props.model.getFullMenu(),
+            price: this.props.model.getTotalMenuPrice()
         });
     }
 
@@ -37,16 +44,55 @@ class Sidebar extends Component {
         this.props.model.setNumberOfGuests(e.target.value);
     };
 
+    removeDishFromMenuButton() {
+        let dishes = this.state.dishes;
+        dishes.map(dish => {
+                this.props.model.removeDishFromMenu(dish.id);
+        });
+        console.log("The dish has been removed");
+    }
+
     render() {
+        let dishesContainer;
+        let guests = this.state.numberOfGuests;
+        let price = this.state.price;
+
         return (
+            dishesContainer = this.state.dishes.map(dish => (
+                <div className="flex-between-dishes">
+                    <div>{dish.title}</div>
+                    <div>{Math.round(dish.pricePerServing * guests)}</div>
+                    <Link to="/search">
+                        <a id="removeDishBtn" className="removeDishBtn" onClick={this.removeDishFromMenuButton}>
+                            <p className="removeBtn">&#x1f5d1;</p>
+                        </a>
+                    </Link>
+                </div>
+                )),
+
             <div className="Sidebar">
-                <h3>This is the sidebar</h3>
-                <p>
-                    People:
-                    <input type="number" value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
-                    <br/>
-                    Total number of guests: {this.state.numberOfGuests}
-                </p>
+                <div id="sidebar-top">
+                    <div>My Dinner</div>
+                    <div className="SEK-text">SEK {price}</div>
+                    <a id="collapse-sidebar-btn" className="hamburger"></a>
+                </div>
+                <div className="collapsible">
+                    <div id="sidebar-people">People:</div>
+                    <input id="sidebar-num-people" type="number" value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
+                    <div id="flex-between">
+                        <div>Dish Name</div>
+                        <div>Cost</div>
+                    </div>
+                    <div id="sidebar-dishes">{dishesContainer}</div>
+                    <div id="sidebar-cost">
+                        <div>SEK {Math.round(price)}</div>
+                    </div>
+
+                    <div id="sidebar-confirm"></div>
+                    <Link to="/">
+                        <button id="sidebarBtn" className="startBtn">Confirm Dinner</button>
+                    </Link>
+                </div>
             </div>
         );
     }
