@@ -108,15 +108,15 @@ class Sidebar extends Component {
         }
 
         return (
-            <div className="Sidebar">
-                <div id="sidebar-top">
-                    <div>My Dinner</div>
-                    <div className="SEK-text">SEK {price}</div>
-                    <button id="collapse-sidebar-btn" className="hamburger" onClick={this.handleNavbar}></button>
-                </div>
+                <div className="Sidebar">
+                    <div id="sidebar-top">
+                        <div>My Dinner</div>
+                        <div className="SEK-text">SEK {price}</div>
+                        <button id="collapse-sidebar-btn" className="hamburger" onClick={this.handleNavbar}></button>
+                    </div>
 
-                {collapsible}
-            </div>
+                    {collapsible}
+                </div>
         );
     }
 }

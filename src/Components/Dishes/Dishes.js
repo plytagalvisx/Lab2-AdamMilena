@@ -17,7 +17,7 @@ class Dishes extends Component {
             query: ''
         };
         //this.updateQuery = this.updateQuery.bind(this);
-        this.updateType = this.updateType.bind(this);
+        //this.updateType = this.updateType.bind(this);
         this.pressSearchButton = this.pressSearchButton.bind(this);
 
     }
@@ -50,9 +50,10 @@ class Dishes extends Component {
         this.setState({query: event.target.value});
     }*/
 
-    updateQuery = debounce((e) => {
-        this.setState({ query: e.target.value })
-    }, 400)
+    updateQuery = debounce((query) => {
+        this.setState({ query });
+        this.setState({status: "LOADING"}, this.componentDidMount);
+    }, 100)
 
 
 
@@ -96,7 +97,7 @@ class Dishes extends Component {
                 <div className="grid-search">
                     <div id="searchView" className="flex-between-search1">
                         <h5 id="updateTitle">FIND A DISH</h5>
-                        <input id="inputDishTitle" type="text" placeholder="Enter key words" value={this.state.query} onChange={this.updateQuery}/>
+                        <input id="inputDishTitle" type="text" placeholder="Enter key words" value={this.state.query} onChange={e => this.updateQuery(e.target.value)}/>
                         <label className="space">
                             <select id="selectTypeDish" value={this.state.type} onChange={this.updateType}>
                                 <option>All</option>
