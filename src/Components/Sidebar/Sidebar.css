@@ -62,7 +62,6 @@ Source for hamburger style: https://superdevresources.com/css-hamburger-menu/
 .collapsible {
     grid-column: 1;
     grid-row: 2;
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: white;
@@ -73,15 +72,15 @@ Source for hamburger style: https://superdevresources.com/css-hamburger-menu/
 }
 
 @media (min-width: 450px) {
-    .collapsible {
+    /*.collapsible {
         display: grid;
-    }
+    }*/
 }
 
 @media (max-width: 450px) {
-    .collapsible {
+    /*.collapsible {
         display: none;
-    }
+    }*/
 }
 
 
@@ -145,12 +144,14 @@ Source for hamburger style: https://superdevresources.com/css-hamburger-menu/
 
 @media (min-width: 450px) {
     .hamburger {
-        display: none;
+        /*display: none;*/
+        visibility: hidden;
     }
 
     .collapsible {
         grid-column: 1;
         display: grid;
+        visibility: visible;
     }
 
     .SEK-text {
@@ -161,12 +162,14 @@ Source for hamburger style: https://superdevresources.com/css-hamburger-menu/
 @media (max-width: 450px) {
     #sidebar-top {
         grid-column: 1 / span 2;
+        visibility: visible;
     }
 
     .collapsible {
         grid-column: 1 / span 2;
-        display: none;
+        /*display: none;*/
         border-bottom: 2px solid black;
+        /*visibility: hidden;*/
     }
 }
 

@@ -4,6 +4,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import modelInstance from "../../data/DinnerModel";
 import "./Dishes.css";
+import { debounce } from "lodash";
 
 class Dishes extends Component {
     constructor(props) {
@@ -15,9 +16,10 @@ class Dishes extends Component {
             type: '',
             query: ''
         };
-        this.updateQuery = this.updateQuery.bind(this);
+        //this.updateQuery = this.updateQuery.bind(this);
         this.updateType = this.updateType.bind(this);
         this.pressSearchButton = this.pressSearchButton.bind(this);
+
     }
 
     // this methods is called by React lifecycle when the
@@ -44,9 +46,15 @@ class Dishes extends Component {
             });
     }
 
-    updateQuery(event) {
+    /*updateQuery(event) {
         this.setState({query: event.target.value});
-    }
+    }*/
+
+    updateQuery = debounce((e) => {
+        this.setState({ query: e.target.value })
+    }, 400)
+
+
 
     updateType(event) {
         this.setState({type: event.target.value});

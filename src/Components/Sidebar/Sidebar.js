@@ -11,8 +11,10 @@ class Sidebar extends Component {
             numberOfGuests: this.props.model.getNumberOfGuests(),
             dishes: this.props.model.getFullMenu(),
             price: this.props.model.getTotalMenuPrice(),
+            navBarOpen: false
         };
         this.removeDishFromMenuButton = this.removeDishFromMenuButton.bind(this);
+        this.handleNavbar = this.handleNavbar.bind(this);
     }
 
     // this methods is called by React lifecycle when the
@@ -48,30 +50,39 @@ class Sidebar extends Component {
         console.log("The dish has been removed");
     }
 
+    handleNavbar = () => {
+        this.setState({ navBarOpen: !this.state.navBarOpen });
+    }
+
     render() {
-        let dishesContainer = null;
         let guests = this.state.numberOfGuests;
         let price = this.state.price;
+        let dishesContainer;
 
-        return (
-            dishesContainer = this.state.dishes.map(dish => (
-                <div className="flex-between-dishes">
-                    <div>{dish.title}</div>
-                    <div>{Math.round(dish.pricePerServing * guests)}</div>
-                    <Link to="/search">
-                        <button id="removeDishBtn" className="removeDishBtn" onClick={() => this.removeDishFromMenuButton(dish.id)}>
-                            <p className="removeBtn">&#x1f5d1;</p>
-                        </button>
-                    </Link>
-                </div>
-            )),
+        dishesContainer = this.state.dishes.map(dish => (
+            <div className="flex-between-dishes">
+                <div>{dish.title}</div>
+                <div>{Math.round(dish.pricePerServing * guests)}</div>
+                <Link to="/search">
+                    <button id="removeDishBtn" className="removeDishBtn" onClick={() => this.removeDishFromMenuButton(dish.id)}>
+                        <p className="removeBtn">&#x1f5d1;</p>
+                    </button>
+                </Link>
+            </div>
+        ));
 
-                <div className="Sidebar">
-                    <div id="sidebar-top">
-                        <div>My Dinner</div>
-                        <div className="SEK-text">SEK {price}</div>
-                        <button id="collapse-sidebar-btn" className="hamburger"/>
-                    </div>
+        let collapsible = null;
+        let { navBarOpen } = this.state;
+
+        switch (navBarOpen) {
+            case true:
+                collapsible = (
+                    // Returns empty content for the sidebar navigation bar
+                    <div></div>
+                );
+                break;
+            case false:
+                collapsible = (
                     <div className="collapsible">
                         <div id="sidebar-people">People:</div>
                         <input id="sidebar-num-people" type="number" value={this.state.numberOfGuests} onChange={this.onNumberOfGuestsChanged}/>
@@ -89,7 +100,23 @@ class Sidebar extends Component {
                             <button id="sidebarBtn" className="startBtn">Confirm Dinner</button>
                         </Link>
                     </div>
+                );
+                break;
+            default:
+                collapsible = <b>Failed to collapse the sidebar, please try again</b>;
+                break;
+        }
+
+        return (
+            <div className="Sidebar">
+                <div id="sidebar-top">
+                    <div>My Dinner</div>
+                    <div className="SEK-text">SEK {price}</div>
+                    <button id="collapse-sidebar-btn" className="hamburger" onClick={this.handleNavbar}></button>
                 </div>
+
+                {collapsible}
+            </div>
         );
     }
 }
